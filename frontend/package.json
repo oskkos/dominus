@@ -13,8 +13,10 @@
     "@types/node": "^12.12.34",
     "@types/react": "^16.9.32",
     "@types/react-dom": "^16.9.6",
+    "i18next": "^19.3.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-i18next": "^11.3.4",
     "react-scripts": "3.4.1",
     "typeface-roboto": "0.0.75",
     "typescript": "^3.7.5"
@@ -36,7 +38,9 @@
     ],
     "extends": [
       "react-app",
-      "airbnb", "airbnb/hooks", "airbnb/whitespace",
+      "airbnb",
+      "airbnb/hooks",
+      "airbnb/whitespace",
       "plugin:@typescript-eslint/eslint-recommended",
       "plugin:@typescript-eslint/recommended",
       "plugin:@typescript-eslint/recommended-requiring-type-checking",
@@ -50,7 +54,15 @@
       "@typescript-eslint/explicit-function-return-type": "error",
       "@typescript-eslint/no-unused-vars": "error",
       "semi": "error",
-      "react/jsx-filename-extension": [0, { "extensions": [".jsx", ".tsx"] }],
+      "react/jsx-filename-extension": [
+        0,
+        {
+          "extensions": [
+            ".jsx",
+            ".tsx"
+          ]
+        }
+      ],
       "import/extensions": "off",
       "import/no-unresolved": "off"
     }
