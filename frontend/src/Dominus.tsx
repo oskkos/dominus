@@ -1,10 +1,13 @@
 import React from 'react';
-import {Container} from "@material-ui/core";
-import {Alert} from "@material-ui/lab";
+import DominusAppBar from './AppBar';
 
-
-export function Dominus(_props: {}): JSX.Element {
-    return <Container >
-        <Alert color={"error"}>This is Dominus!</Alert>
-    </Container>;
+export default function Dominus(_props: {}): JSX.Element {
+  return (
+    <div>
+      <DominusAppBar />
+      <React.StrictMode>
+        content here
+      </React.StrictMode>
+    </div>
+  );
 }
