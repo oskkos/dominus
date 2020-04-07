@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import Dominus from './Dominus';
-import './i18n';
 
 // eslint-disable-next-line functional/no-expression-statement
 ReactDOM.render(<Dominus />, document.getElementById('root'));

@@ -12,6 +12,8 @@ import {
 import {
   Home, HomeWork, HowToReg, Person, Settings,
 } from '@material-ui/icons';
+import { Link } from 'react-router-dom';
+import { i18nKeys, useLocHelper } from './i18n';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -25,18 +27,22 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
 }));
 
-const items: ReadonlyArray<{readonly text: string; readonly icon: JSX.Element}> = [
-  { text: 'Omat asunnot', icon: <Home /> },
-  { text: 'Vuokralaiset', icon: <HowToReg /> },
-  { text: 'Sekalainen', icon: <Settings /> },
-  { text: 'Asunnonkyselijät', icon: <Person /> },
-  { text: 'Muut kiinnostavat kohteet', icon: <HomeWork /> },
-];
+// TODO: Type-safe paths
+type Item = {readonly locCode: i18nKeys; readonly icon: JSX.Element; readonly path: string};
 
 export default function DominusAppBar(_props: {}): JSX.Element {
-  const classes = useStyles();
-
   const [openState, setOpenState] = useState(false);
+  const classes = useStyles();
+  const { t } = useLocHelper();
+
+  const items: ReadonlyArray<Item> = [
+    { locCode: 'ownApartments', icon: <Home />, path: '/apartments' },
+    { locCode: 'tenants', icon: <HowToReg />, path: '/tenants' },
+    { locCode: 'misc', icon: <Settings />, path: '/misc' },
+    { locCode: 'homeSeekers', icon: <Person />, path: '/homeSeekers' },
+    { locCode: 'otherInterestingApartments', icon: <HomeWork />, path: '/otherApts' },
+  ];
+
   // eslint-disable-next-line functional/no-return-void
   const toggleDrawer = (open: boolean): void => {
     // eslint-disable-next-line functional/no-expression-statement
@@ -57,10 +63,14 @@ export default function DominusAppBar(_props: {}): JSX.Element {
           >
             <List>
               {items.map((item) => (
-                <ListItem button key={item.text}>
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText primary={item.text} />
-                </ListItem>
+                <Link to={item.path} onClick={(_e) => setOpenState(false)}>
+                  <ListItem button key={item.locCode}>
+                    <ListItemIcon>{item.icon}</ListItemIcon>
+                    <ListItemText>
+                      {t(item.locCode)}
+                    </ListItemText>
+                  </ListItem>
+                </Link>
               ))}
             </List>
           </SwipeableDrawer>

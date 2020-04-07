@@ -1,20 +1,39 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from 'react-router-dom';
 import DominusAppBar from './AppBar';
-import { i18nKeys } from './i18n';
+import OwnApartments from './OwnApartments';
 
 export default function Dominus(_props: {}): JSX.Element {
-  const { t, i18n } = useTranslation();
-  const loc: (key: i18nKeys) => string = t;
-  // eslint-disable-next-line functional/no-expression-statement
-  i18n.changeLanguage('fi');
   return (
-    <div>
+    <Router>
       <DominusAppBar />
       <React.StrictMode>
-        {loc('contentTemplate')}
-        {loc('contentTemplate2')}
+        <Switch>
+          // TODO: Type-safe paths
+          <Route path="/apartments">
+            <OwnApartments />
+          </Route>
+          <Route path="/tenants">
+            <div>tenants</div>
+          </Route>
+          <Route path="/misc">
+            <div>misc</div>
+          </Route>
+          <Route path="/homeSeekers">
+            <div>home seekers</div>
+          </Route>
+          <Route path="/otherApts">
+            <div>other interesting apartments</div>
+          </Route>
+          <Route path="/">
+            <div />
+          </Route>
+        </Switch>
       </React.StrictMode>
-    </div>
+    </Router>
   );
 }
