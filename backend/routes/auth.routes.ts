@@ -1,6 +1,6 @@
-import { signin } from "../controllers/auth.controller";
-import {Express} from 'express';
+import { Express } from 'express';
+import signin from '../controllers/auth.controller';
 
-export function authRoutes(app: Express) {
-  app.post("/api/auth/signin", signin);
+export default function authRoutes(app: Express): void {
+  app.post('/api/auth/signin', signin);
 }

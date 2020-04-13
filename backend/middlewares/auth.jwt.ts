@@ -1,90 +1,41 @@
 import { Request, Response, NextFunction } from 'express';
-import { secret } from '../config/auth.config'
-import {verify, VerifyErrors} from 'jsonwebtoken';
+import {
+  decode, sign, verify, VerifyErrors,
+} from 'jsonwebtoken';
+import { secret } from '../config/auth.config';
+import * as Auth from '../models/Auth';
+import { User } from '../models/User';
 
-export function verifyToken(req: Request, res: Response, next: NextFunction) {
-  const token = req.headers["x-access-token"] as string | undefined;
+export function verifyToken(req: Request, res: Response, next: NextFunction): Response {
+  const token = req.headers['x-access-token'] as string | undefined;
 
   if (!token) {
-    return res.status(403).send({ message: "No token provided!" });
+    return res.status(403).send({ message: 'No token provided!' });
   }
 
-  verify(token, secret, (err: VerifyErrors | null, decoded?: {id?: string}) => {
+  verify(token, secret, (err: VerifyErrors | null, decoded?: {}) => {
     if (err) {
-      return res.status(401).send({ message: "Unauthorized!" });
+      return res.status(401).send({ message: 'Unauthorized!' });
     }
-    // @ts-ignore
-    req.userId = decoded?.id;
+    if (decoded) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
+      req.userId = (decoded as Auth.Token).id;
+    }
     next();
     return res;
   });
   return res;
 }
+export function decodeToken(req: Request): Auth.Token | null {
+  const token = req.headers['x-access-token'] as string | undefined;
 
-/*
-isAdmin = (req, res, next) => {
-  User.findByPk(req.userId).then(user => {
-    user.getRoles().then(roles => {
-      for (let i = 0; i < roles.length; i++) {
-        if (roles[i].name === "admin") {
-          next();
-          return;
-        }
-      }
-
-      res.status(403).send({
-        message: "Require Admin Role!"
-      });
-      return;
-    });
-  });
-};
-
-isModerator = (req, res, next) => {
-  User.findByPk(req.userId).then(user => {
-    user.getRoles().then(roles => {
-      for (let i = 0; i < roles.length; i++) {
-        if (roles[i].name === "moderator") {
-          next();
-          return;
-        }
-      }
-
-      res.status(403).send({
-        message: "Require Moderator Role!"
-      });
-    });
-  });
-};
-
-isModeratorOrAdmin = (req, res, next) => {
-  User.findByPk(req.userId).then(user => {
-    user.getRoles().then(roles => {
-      for (let i = 0; i < roles.length; i++) {
-        if (roles[i].name === "moderator") {
-          next();
-          return;
-        }
-
-        if (roles[i].name === "admin") {
-          next();
-          return;
-        }
-      }
-
-      res.status(403).send({
-        message: "Require Moderator or Admin Role!"
-      });
-    });
-  });
-};
-
-const authJwt = {
-  verifyToken: verifyToken,
-  isAdmin: isAdmin,
-  isModerator: isModerator,
-  isModeratorOrAdmin: isModeratorOrAdmin
-};
-module.exports = authJwt;
-
- */
+  if (!token) {
+    return null;
+  }
+  return decode(token) as Auth.Token;
+}
+export function signToken(user: User): string {
+  const payload: Auth.Token = { id: user.id, username: user.username };
+  return sign(payload, secret, { expiresIn: 86400 /* 24 hours */ });
+}

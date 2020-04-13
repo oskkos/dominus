@@ -1,13 +1,14 @@
-import express = require("express");
-import bodyParser = require("body-parser");
-import cors = require("cors");
-import {authRoutes} from './routes/auth.routes';
-import {userRoutes} from './routes/user.routes';
+import authRoutes from './routes/auth.routes';
+import userRoutes from './routes/user.routes';
+
+import express = require('express');
+import bodyParser = require('body-parser');
+import cors = require('cors');
 
 const app = express();
 
-var corsOptions = {
-  origin: "http://localhost:8081"
+const corsOptions = {
+  origin: 'http://localhost:8081',
 };
 
 app.use(cors(corsOptions));
@@ -19,8 +20,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // simple route
-app.get("/", (_req, res) => {
-  res.json({ message: "Welcome to dominus." });
+app.get('/', (_req, res) => {
+  res.json({ message: 'Welcome to dominus.' });
 });
 authRoutes(app);
 userRoutes(app);
