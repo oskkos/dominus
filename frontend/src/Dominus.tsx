@@ -1,39 +1,67 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect,
 } from 'react-router-dom';
+import { RouteComponentProps, RouteProps } from 'react-router';
 import DominusAppBar from './AppBar';
 import OwnApartments from './OwnApartments';
+import Login from './Login';
 
 export default function Dominus(_props: {}): JSX.Element {
   return (
     <Router>
-      <DominusAppBar />
+      <DominusAppBar authenticated={isAuthenticated()} />
       <React.StrictMode>
         <Switch>
           // TODO: Type-safe paths
-          <Route path="/apartments">
+          <Route path="/login">
+            <Login />
+          </Route>
+          <AuthRoute path="/apartments">
             <OwnApartments />
-          </Route>
-          <Route path="/tenants">
+          </AuthRoute>
+          <AuthRoute path="/tenants">
             <div>tenants</div>
-          </Route>
-          <Route path="/misc">
+          </AuthRoute>
+          <AuthRoute path="/misc">
             <div>misc</div>
-          </Route>
-          <Route path="/homeSeekers">
+          </AuthRoute>
+          <AuthRoute path="/homeSeekers">
             <div>home seekers</div>
-          </Route>
-          <Route path="/otherApts">
+          </AuthRoute>
+          <AuthRoute path="/otherApts">
             <div>other interesting apartments</div>
-          </Route>
-          <Route path="/">
+          </AuthRoute>
+          <AuthRoute path="/">
             <div />
-          </Route>
+          </AuthRoute>
         </Switch>
       </React.StrictMode>
     </Router>
   );
+}
+
+function isAuthenticated(_foo?: string): boolean {
+  return false;
+}
+function AuthRoute(props: RouteProps): JSX.Element {
+  const { children, ...rest } = props;
+
+  const renderer = (props: RouteComponentProps<{}>): ReactNode => {
+    const location = props.location;
+    return isAuthenticated()
+      ? children
+      : (
+        <Redirect
+          to={{
+            pathname: "/login",
+            state: { from: location },
+          }}
+        />
+      );
+  };
+  return <Route {...rest} render={renderer} />;
 }
