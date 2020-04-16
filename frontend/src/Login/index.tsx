@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { FormEvent, useState } from 'react';
 import {
   Button, Card, CardActions, CardContent, CardHeader, Typography, TextField,
 } from '@material-ui/core';
 import LockIcon from '@material-ui/icons/Lock';
 import { makeStyles } from '@material-ui/core/styles';
 import { useLocHelper } from '../i18n';
+import { useHistory, useLocation } from 'react-router-dom';
+import { Alert } from '@material-ui/lab';
 
 const useStyles = makeStyles({
   wrapper: {
@@ -12,6 +14,7 @@ const useStyles = makeStyles({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    flexDirection: 'column',
   },
   root: {
     width: 275,
@@ -35,13 +38,58 @@ const useStyles = makeStyles({
   footer: {
     display: 'flex',
   },
+  error: {
+    marginTop: '10px',
+  }
 });
-export default function Login(_props: {}): JSX.Element {
+// eslint-disable-next-line functional/no-return-void
+export default function Login(props: { readonly onLogin: (token: string|null) => void }): JSX.Element {
   const classes = useStyles();
   const { t } = useLocHelper();
+  const [state, setState] = useState({} as {readonly msg?: string; readonly username?: string; readonly password?: string});
+  const history = useHistory();
+  const location = useLocation<{ readonly from: string }>();
 
+  const { from } = location.state || { from: { pathname: "/" } };
+
+  async function handleSubmit(event: FormEvent): Promise<boolean> {
+    // eslint-disable-next-line functional/no-expression-statement
+    console.log(state);
+    // eslint-disable-next-line functional/no-expression-statement
+    event.preventDefault();
+    const response: Response = await fetch('http://localhost:7000/api/auth/signin', {
+      method: 'POST',
+      mode: 'cors', // no-cors, *cors, same-origin
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: 'same-origin', // include, *same-origin, omit
+      headers: {
+        'Content-Type': 'application/json',
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: 'follow', // manual, *follow, error
+      referrerPolicy: 'no-referrer', // no-referrer, *client
+      body: JSON.stringify(state), // body data type must match "Content-Type" header
+    });
+    // eslint-disable-next-line functional/no-expression-statement
+    response.json().then((ret: {readonly message: string; readonly accessToken: string}) => {
+      // eslint-disable-next-line functional/no-conditional-statement
+      if (response.status !== 200) {
+        // eslint-disable-next-line functional/no-expression-statement
+        setState({ ...state, msg: ret.message });
+      } else {
+        // eslint-disable-next-line functional/no-expression-statement
+        history.replace(from);
+        // eslint-disable-next-line functional/no-expression-statement
+        props.onLogin(ret.accessToken);
+      }
+    });
+    return false;
+  }
   return (
-    <div className={classes.wrapper}>
+    <form
+      onSubmit={handleSubmit}
+      className={classes.wrapper}
+    >
       <Card className={classes.root}>
         <CardHeader title={(
           <div className={classes.header}>
@@ -60,6 +108,7 @@ export default function Login(_props: {}): JSX.Element {
             type="text"
             autoComplete="current-username"
             variant="outlined"
+            onChange={(e) => setState({ ...state, username: e.target.value })}
           />
           <TextField
             required
@@ -68,12 +117,14 @@ export default function Login(_props: {}): JSX.Element {
             type="password"
             autoComplete="current-password"
             variant="outlined"
+            onChange={(e) => setState({ ...state, password: e.target.value })}
           />
         </CardContent>
         <CardActions className={classes.footer}>
-          <Button variant="contained" style={{ flex: '1 1 auto' }} color="primary">{t('login')}</Button>
+          <Button variant="contained" style={{ flex: '1 1 auto' }} color="primary" type="submit">{t('login')}</Button>
         </CardActions>
       </Card>
-    </div>
+      {state.msg && <Alert className={classes.error} severity="error">{state.msg}</Alert>}
+    </form>
   );
 }
