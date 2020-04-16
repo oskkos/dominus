@@ -9,9 +9,20 @@ import { RouteComponentProps, RouteProps } from 'react-router';
 import DominusAppBar from './AppBar';
 import OwnApartments from './OwnApartments';
 import Login from './Login';
+import jwtDecode from 'jwt-decode';
+
+// eslint-disable-next-line functional/functional-parameters
+function isAuthenticated(): boolean {
+  const token = localStorage.getItem('dominus-token');
+  // eslint-disable-next-line functional/no-conditional-statement
+  if (!token) {
+    return false;
+  }
+  return jwtDecode<{readonly exp: number}>(token).exp > (Date.now() / 1000);
+}
 
 export default function Dominus(_props: {}): JSX.Element {
-  const [state, setState] = useState({ isAuthenticated: !!localStorage.getItem('dominus-token') });
+  const [state, setState] = useState({ isAuthenticated: isAuthenticated() });
 
   // eslint-disable-next-line functional/no-return-void,functional/functional-parameters
   function onLogout(): void {
