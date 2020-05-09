@@ -1,9 +1,12 @@
 import authRoutes from './routes/auth.routes';
 import userRoutes from './routes/user.routes';
+import swaggerSpec from './swagger';
 
 import express = require('express');
 import bodyParser = require('body-parser');
 import cors = require('cors');
+import swaggerUi = require('swagger-ui-express');
+
 
 const app = express();
 
@@ -25,7 +28,8 @@ app.get('/', (_req, res) => {
 });
 authRoutes(app);
 userRoutes(app);
-
+app.use('/docs', swaggerUi.serve);
+app.get('/docs', swaggerUi.setup(swaggerSpec, { explorer: true }));
 
 // set port, listen for requests
 const PORT = process.env.PORT || 7000;

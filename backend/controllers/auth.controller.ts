@@ -1,31 +1,23 @@
-import { Request, Response } from 'express';
 import { compareSync } from 'bcrypt';
 import { getByUserName } from '../dao/user.dao';
 import { signToken } from '../middlewares/auth.jwt';
+import { User } from '../models/User';
+import { Token } from '../models/Auth';
 
-export default async function signin(req: Request, res: Response): Promise<Response> {
-  const user = await getByUserName(req.body.username);
+export default async function signin(input: User): Promise<Token> {
+  const user = await getByUserName(input.username);
   if (!user) {
-    return res.status(404).send({
-      accessToken: null,
-      message: 'User not found.',
-    });
+    throw new Error('404:User not found.');
   }
-  if (!req.body.password) {
-    return res.status(401).send({
-      accessToken: null,
-      message: 'Password missing.',
-    });
+  if (!input.password) {
+    throw new Error('401:Password missing.');
   }
-  if (!compareSync(req.body.password, user.cryptedPassword)) {
-    return res.status(401).send({
-      accessToken: null,
-      message: 'Invalid Password!',
-    });
+  if (!compareSync(input.password, user.cryptedPassword)) {
+    throw new Error('401:Invalid password.');
   }
-  return res.status(200).send({
+  return {
     id: user.id,
     username: user.username,
     accessToken: signToken(user),
-  });
+  };
 }
