@@ -14,6 +14,6 @@ async function migrationRunner(): Promise<void> {
     ...conf,
     defaultDatabase: 'postgres', // defaults to "postgres"
   });
-  await migrate(conf, './migrations');
+  await migrate(conf, '../migrations');
 }
 migrationRunner();

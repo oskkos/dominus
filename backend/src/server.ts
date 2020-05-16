@@ -1,12 +1,12 @@
-import authRoutes from './routes/auth.routes';
-import userRoutes from './routes/user.routes';
-import swaggerSpec from './swagger';
+// import authController from './controllers/auth.routes';
+// import userController from './controllers/user.routes';
 
-import express = require('express');
+import swaggerUi from 'swagger-ui-express';
+import express, { Response, Request } from 'express';
+import { RegisterRoutes } from '../routes';
+
 import bodyParser = require('body-parser');
 import cors = require('cors');
-import swaggerUi = require('swagger-ui-express');
-
 
 const app = express();
 
@@ -26,10 +26,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', (_req, res) => {
   res.json({ message: 'Welcome to dominus.' });
 });
-authRoutes(app);
-userRoutes(app);
-app.use('/docs', swaggerUi.serve);
-app.get('/docs', swaggerUi.setup(swaggerSpec, { explorer: true }));
+
+app.use('/docs', swaggerUi.serve, async (_req: Request, res: Response) => res.send(
+  swaggerUi.generateHTML(await import('../swagger.json')),
+));
+RegisterRoutes(app);
+
+// authController(app);
+// userController(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 7000;
