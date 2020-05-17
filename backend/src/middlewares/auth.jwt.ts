@@ -5,8 +5,9 @@ import {
 import { secret } from '../config/auth.config';
 import * as Auth from '../models/Auth';
 import { User } from '../models/User';
+import getUser from '../services/user.service';
 
-export function expressAuthentication(
+export async function expressAuthentication(
   request: Request,
   securityName: string,
   scopes?: string[],
@@ -34,16 +35,18 @@ export function expressAuthentication(
             reject(new Error('JWT does not contain required scope.'));
           }
         });
-        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-        // @ts-ignore
-        request.userId = (decoded as Auth.Token).id;
-        resolve(decoded);
+        getUser((decoded as Auth.AuthToken).id).then((user) => {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+          // @ts-ignore
+          globalThis.user = user;
+          resolve(decoded);
+        });
       }
     });
   });
 }
 
 export function signToken(user: User): string {
-  const payload: Omit<Auth.Token, 'accessToken'> = { id: user.id, username: user.username };
+  const payload: Omit<Auth.AuthToken, 'accessToken'> = { id: user.id, username: user.username };
   return sign(payload, secret, { expiresIn: 86400 /* 24 hours */ });
 }

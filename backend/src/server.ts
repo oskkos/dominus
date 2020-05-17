@@ -4,6 +4,7 @@
 import swaggerUi from 'swagger-ui-express';
 import express, { Response, Request } from 'express';
 import { RegisterRoutes } from '../routes';
+import { getLogger } from './middlewares/logger';
 
 import bodyParser = require('body-parser');
 import cors = require('cors');
@@ -32,11 +33,14 @@ app.use('/docs', swaggerUi.serve, async (_req: Request, res: Response) => res.se
 ));
 RegisterRoutes(app);
 
-// authController(app);
-// userController(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 7000;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
+  const logger = getLogger('server');
+  logger.trace(`Server is running on port ${PORT}.`);
+  logger.debug(`Server is running on port ${PORT}.`);
+  logger.info(`Server is running on port ${PORT}.`);
+  logger.warn(`Server is running on port ${PORT}.`);
+  logger.error(`Server is running on port ${PORT}.`);
 });

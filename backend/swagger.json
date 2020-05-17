@@ -6,7 +6,7 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
-			"Token": {
+			"AuthToken": {
 				"properties": {
 					"id": {
 						"type": "number",
@@ -86,7 +86,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/Token"
+									"$ref": "#/components/schemas/AuthToken"
 								}
 							}
 						},

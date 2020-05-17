@@ -21,6 +21,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
+    "log4js": "^6.2.1",
     "pg": "^8.0.2",
     "postgres-migrations": "^4.0.3",
     "swagger-ui-express": "^4.1.4",

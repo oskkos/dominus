@@ -38,11 +38,3 @@ export async function getSingle<T, U extends ReadonlyArray<any> = QueryParams>(
   }
   return res.rows[0];
 }
-
-/*
-  getClient: (callback) => {
-    pool.connect((err, client, done) => {
-      callback(err, client, done)
-    })
-  }
-  */

@@ -1,11 +1,9 @@
 import {
-  Controller, Get, Request, Route, Security, Tags,
+  Controller, Get, Route, Security, Tags,
 } from 'tsoa';
-// import signin from '../services/auth.service';
-// import { User } from '../models/User';
-import { Request as Req } from 'express';
 import getUser from '../services/user.service';
 import { User } from '../models/User';
+import { getLogger } from '../middlewares/logger';
 
 @Route('user')
 @Tags('User')
@@ -17,12 +15,10 @@ export class UserController extends Controller {
   @Security('apiKey')
   @Get('self')
   // eslint-disable-next-line class-methods-use-this
-  public getSelf(@Request() request: Req): Promise<User> {
+  public getSelf(): Promise<User> {
+    getLogger('user.controller').trace('getSelf');
     // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
     // @ts-ignore
-    console.log(request.userId);
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-    // @ts-ignore
-    return getUser(request.userId);
+    return getUser(globalThis.userId);
   }
 }
