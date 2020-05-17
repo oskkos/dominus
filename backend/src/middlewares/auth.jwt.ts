@@ -11,7 +11,7 @@ export function expressAuthentication(
   securityName: string,
   scopes?: string[],
 ): Promise<unknown> {
-  if (securityName !== 'jwt') {
+  if (securityName !== 'apiKey') {
     throw new Error(`Unsupported securityName:${securityName}`);
   }
   const token = request.body.token

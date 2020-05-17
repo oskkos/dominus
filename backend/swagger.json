@@ -60,7 +60,13 @@
 				"additionalProperties": false
 			}
 		},
-		"securitySchemes": {}
+		"securitySchemes": {
+			"apiKey": {
+				"type": "apiKey",
+				"in": "header",
+				"name": "x-access-token"
+			}
+		}
 	},
 	"info": {
 		"title": "dominus-backend",
@@ -119,7 +125,7 @@
 				"description": "Entry point for getting self",
 				"security": [
 					{
-						"jwt": []
+						"apiKey": []
 					}
 				],
 				"parameters": []

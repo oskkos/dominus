@@ -13,7 +13,7 @@ export class UserController extends Controller {
   /**
    * Entry point for getting self
    */
-  @Security('jwt')
+  @Security('apiKey')
   @Get('self')
   // eslint-disable-next-line class-methods-use-this
   public getSelf(@Request() request: Req): Promise<User> {
