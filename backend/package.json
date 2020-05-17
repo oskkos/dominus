@@ -11,7 +11,7 @@
     "lint": "eslint **/*.ts --fix",
     "build": "tsoa spec-and-routes && tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "generate-client": "openapi-generator generate -g typescript-fetch -i ./swagger.json -o ../frontend/api"
+    "generate-client": "openapi-generator generate -g typescript-fetch --additional-properties=typescriptThreePlus=true -i ./swagger.json -o ../frontend/src/api"
   },
   "author": "",
   "license": "ISC",

@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useLocHelper } from '../i18n';
 import { useHistory, useLocation } from 'react-router-dom';
 import { Alert } from '@material-ui/lab';
+import { AuthApi } from '../api/apis';
 
 const useStyles = makeStyles({
   wrapper: {
@@ -49,14 +50,15 @@ export default function Login(props: { readonly onLogin: (token: string|null) =>
   const [state, setState] = useState({} as {readonly msg?: string; readonly username?: string; readonly password?: string});
   const history = useHistory();
   const location = useLocation<{ readonly from: string }>();
-
+  const authApi = new AuthApi();
   const { from } = location.state || { from: { pathname: "/" } };
 
   async function handleSubmit(event: FormEvent): Promise<boolean> {
     // eslint-disable-next-line functional/no-expression-statement
-    console.log(state);
+    // console.log(state);
     // eslint-disable-next-line functional/no-expression-statement
     event.preventDefault();
+    /*
     const response: Response = await fetch('http://localhost:7000/api/auth/signin', {
       method: 'POST',
       mode: 'cors', // no-cors, *cors, same-origin
@@ -70,6 +72,14 @@ export default function Login(props: { readonly onLogin: (token: string|null) =>
       referrerPolicy: 'no-referrer', // no-referrer, *client
       body: JSON.stringify(state), // body data type must match "Content-Type" header
     });
+    */
+    const token = await authApi.signin({ authUser: { password: state.password ?? '', username: state.username ?? '' } });
+    // eslint-disable-next-line functional/no-expression-statement
+    history.replace(from);
+    // eslint-disable-next-line functional/no-expression-statement
+    props.onLogin(token.accessToken);
+
+    /*
     // eslint-disable-next-line functional/no-expression-statement
     response.json().then((ret: {readonly message: string; readonly accessToken: string}) => {
       // eslint-disable-next-line functional/no-conditional-statement
@@ -83,6 +93,7 @@ export default function Login(props: { readonly onLogin: (token: string|null) =>
         props.onLogin(ret.accessToken);
       }
     });
+     */
     return false;
   }
   return (

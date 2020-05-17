@@ -17,7 +17,7 @@ const models: TsoaRoute.Models = {
         "properties": {
             "id": { "dataType": "double", "required": true },
             "username": { "dataType": "string", "required": true },
-            "accessToken": { "dataType": "string" },
+            "accessToken": { "dataType": "string", "required": true },
         },
         "additionalProperties": false,
     },

@@ -1,5 +1,5 @@
 import {
-  Controller, Get, Request, Route, Security,
+  Controller, Get, Request, Route, Security, Tags,
 } from 'tsoa';
 // import signin from '../services/auth.service';
 // import { User } from '../models/User';
@@ -8,6 +8,7 @@ import getUser from '../services/user.service';
 import { User } from '../models/User';
 
 @Route('user')
+@Tags('User')
 // eslint-disable-next-line import/prefer-default-export
 export class UserController extends Controller {
   /**

@@ -1,5 +1,5 @@
 import { compareSync } from 'bcrypt';
-import { getByUserName } from '../dao/user.dao';
+import { getByUserName } from '../repositories/user.repository';
 import { signToken } from '../middlewares/auth.jwt';
 import { AuthUser } from '../models/User';
 import { Token } from '../models/Auth';

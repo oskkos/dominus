@@ -21,7 +21,8 @@
 				},
 				"required": [
 					"id",
-					"username"
+					"username",
+					"accessToken"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -93,6 +94,9 @@
 					}
 				},
 				"description": "Authenticates user into dominus. Supply proper username and password.",
+				"tags": [
+					"Auth"
+				],
 				"security": [],
 				"parameters": [],
 				"requestBody": {
@@ -123,6 +127,9 @@
 					}
 				},
 				"description": "Entry point for getting self",
+				"tags": [
+					"User"
+				],
 				"security": [
 					{
 						"apiKey": []
@@ -134,7 +141,7 @@
 	},
 	"servers": [
 		{
-			"url": "/"
+			"url": "http://localhost:7000/"
 		}
 	]
 }
