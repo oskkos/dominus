@@ -4,11 +4,13 @@
 import swaggerUi from 'swagger-ui-express';
 import express, { Response, Request } from 'express';
 import { RegisterRoutes } from '../routes';
-import { getLogger } from './middlewares/logger';
+import { configureLogger, getLogger } from './middlewares/logger';
+import { decodeToken, getToken } from './middlewares/auth.jwt';
 
 import bodyParser = require('body-parser');
 import cors = require('cors');
 
+const logger = getLogger();
 const app = express();
 
 const corsOptions = {
@@ -23,6 +25,11 @@ app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use((req, _res, next) => {
+  const token = getToken(req);
+  configureLogger(token ? decodeToken(token) : null);
+  next();
+});
 // simple route
 app.get('/', (_req, res) => {
   res.json({ message: 'Welcome to dominus.' });
@@ -37,10 +44,6 @@ RegisterRoutes(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 7000;
 app.listen(PORT, () => {
-  const logger = getLogger('server');
-  logger.trace(`Server is running on port ${PORT}.`);
-  logger.debug(`Server is running on port ${PORT}.`);
+  configureLogger(null);
   logger.info(`Server is running on port ${PORT}.`);
-  logger.warn(`Server is running on port ${PORT}.`);
-  logger.error(`Server is running on port ${PORT}.`);
 });

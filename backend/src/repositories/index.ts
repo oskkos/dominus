@@ -1,5 +1,8 @@
 import { Pool, QueryResult } from 'pg';
 import { dbConfig } from '../config/db.config';
+import { getLogger } from '../middlewares/logger';
+
+const logger = getLogger();
 
 const pool = new Pool({
   user: dbConfig.USER,
@@ -17,11 +20,11 @@ export async function query<T, U extends ReadonlyArray<any> = QueryParams>(
   return pool.query<T>(text, [...params])
     .then((res) => {
       const duration = Date.now() - start;
-      console.log('executed query', { text, duration, rows: res.rowCount });
+      logger.debug(`Executed query ${text} with params [${params.join(', ')}] in ${duration}ms. ${res.rowCount} rows found`);
       return res;
     })
     .catch((err) => {
-      console.log('query failed', { text }, err);
+      logger.error(`Query ${text} with params [${params.join(', ')}] failed`, [err]);
       throw err;
     });
 }

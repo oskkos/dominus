@@ -1,6 +1,6 @@
-import { getById } from '../repositories/user.repository';
+import { openById } from '../repositories/user.repository';
 import { User } from '../models/User';
 
-export default async function getUser(id: number): Promise<User | null> {
-  return getById(id);
+export default async function openUser(id: number): Promise<User> {
+  return openById(id);
 }

@@ -21,9 +21,12 @@ function toUserWithPW(row: UserRow): UserWithCryptedPassword {
   };
 }
 
-export async function getById(id: number): Promise<User | null> {
+export async function openById(id: number): Promise<User> {
   const userRow = await getSingle<UserRow>('SELECT * FROM users WHERE id = $1', [id]);
-  return userRow ? toUser(userRow) : null;
+  if (userRow) {
+    return toUser(userRow);
+  }
+  throw new Error(`User open failed with id: ${id}`);
 }
 export async function getByUserName(username: string): Promise<UserWithCryptedPassword | null> {
   const userRow = await getSingle<UserRow>('SELECT * FROM users WHERE username = $1', [username]);
