@@ -5,7 +5,7 @@ import {
 import { secret } from '../config/auth.config';
 import * as Auth from '../models/Auth';
 import { User } from '../models/User';
-import getUser from '../services/user.service';
+import { getLogger } from './logger';
 
 export async function expressAuthentication(
   request: Request,
@@ -35,12 +35,13 @@ export async function expressAuthentication(
             reject(new Error('JWT does not contain required scope.'));
           }
         });
-        getUser((decoded as Auth.AuthToken).id).then((user) => {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-          // @ts-ignore
-          globalThis.user = user;
-          resolve(decoded);
-        });
+        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+        // @ts-ignore
+        request.userId = (decoded as Auth.AuthToken).id;
+        resolve(decoded);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+        // @ts-ignore
+        getLogger('auth.jwt').info(`User ${request.userId as string} authenticated`);
       }
     });
   });

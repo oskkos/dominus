@@ -17,7 +17,7 @@ export class AuthController extends Controller {
   // eslint-disable-next-line class-methods-use-this
   public async signin(@Body() user: AuthUser): Promise<AuthToken> {
     const token = signin(user);
-    getLogger('auth.controller').trace('Signin {} {}', [user, token]);
+    getLogger('auth.controller').trace('Signin', [user.username]);
     return token;
   }
 }
