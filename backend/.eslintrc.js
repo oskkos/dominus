@@ -18,7 +18,10 @@ module.exports = {
     "semi": "error",
     "import/extensions": "off",
     "import/no-unresolved": "off",
-    "no-console": "off",
+    "import/prefer-default-export": "off",
+    "import/no-default-export": "error",
+    "no-console": "error",
+    "class-methods-use-this": "off",
   },
   globals: {
     Atomics: 'readonly',

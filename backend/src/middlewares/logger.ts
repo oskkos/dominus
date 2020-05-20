@@ -24,7 +24,6 @@ export function configureLogger(token: AuthToken | null): void {
   });
 }
 
-// eslint-disable-next-line import/prefer-default-export
 export function getLogger(loggerName?: string, level = 'trace'): log4js.Logger {
   const category = loggerName || caller().split('\\src\\')[1];
   if (!category) {

@@ -4,7 +4,7 @@ import { signToken } from '../middlewares/auth.jwt';
 import { AuthUser } from '../models/User';
 import { AuthToken } from '../models/Auth';
 
-export default async function signin(input: AuthUser): Promise<AuthToken> {
+export async function signin(input: AuthUser): Promise<AuthToken> {
   const user = await getByUserName(input.username);
   if (!user) {
     throw new Error('User not found.');

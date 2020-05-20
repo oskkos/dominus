@@ -4,6 +4,7 @@
 require('dotenv').config();
 
 /* eslint-disable import/first */
+import 'reflect-metadata';
 import swaggerUi from 'swagger-ui-express';
 import express, { Response, Request } from 'express';
 import { RegisterRoutes } from '../routes';

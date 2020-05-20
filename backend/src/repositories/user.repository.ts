@@ -1,34 +1,36 @@
-import { getSingle } from './index';
+import { createConnection } from 'typeorm';
 import { UserWithCryptedPassword, User } from '../models/User';
-
-interface UserRow {
-  id: number;
-  username: string;
-  password: string;
-}
-
-function toUser(row: UserRow): User {
-  return {
-    id: row.id,
-    username: row.username,
-  };
-}
-function toUserWithPW(row: UserRow): UserWithCryptedPassword {
-  return {
-    id: row.id,
-    username: row.username,
-    cryptedPassword: row.password,
-  };
-}
+import { User as EntityUser } from '../entities/User';
 
 export async function openById(id: number): Promise<User> {
-  const userRow = await getSingle<UserRow>('SELECT * FROM users WHERE id = $1', [id]);
-  if (userRow) {
-    return toUser(userRow);
+  const connection = await createConnection();
+  const userRepository = connection.getRepository(EntityUser);
+  const user = await userRepository.findOne({ id });
+  connection.close();
+  if (user) {
+    return { id: user.id, username: user.username };
   }
   throw new Error(`User open failed with id: ${id}`);
 }
 export async function getByUserName(username: string): Promise<UserWithCryptedPassword | null> {
-  const userRow = await getSingle<UserRow>('SELECT * FROM users WHERE username = $1', [username]);
-  return userRow ? toUserWithPW(userRow) : null;
+  const connection = await createConnection();
+  const userRepository = connection.getRepository(EntityUser);
+  const user = await userRepository.findOne({ username });
+  connection.close();
+  if (!user) {
+    return null;
+  }
+  return {
+    id: user.id,
+    username: user.username,
+    cryptedPassword: user.cryptedPassword,
+  };
+}
+
+export async function addUser(username: string, password: string, name: string): Promise<void> {
+  const connection = await createConnection();
+  const userRepository = connection.getRepository(EntityUser);
+  const user = new EntityUser(username, password, name);
+  await userRepository.save(user);
+  connection.close();
 }
