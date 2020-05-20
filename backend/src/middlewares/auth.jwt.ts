@@ -3,14 +3,14 @@ import {
   decode,
   sign, verify, VerifyErrors,
 } from 'jsonwebtoken';
-import { secret } from '../config/auth.config';
 import { User } from '../models/User';
 import { getLogger } from './logger';
 import { AuthToken } from '../models/Auth';
 
+const secret = process.env.JWT_SECRET_KEY as string;
+
 export const getToken = (request: Request): string => request.body.token || request.query.token || request.headers['x-access-token'];
 export const decodeToken = (token: string): AuthToken => decode(token) as AuthToken;
-
 export async function expressAuthentication(
   request: Request,
   securityName: string,

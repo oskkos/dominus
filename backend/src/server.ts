@@ -1,6 +1,9 @@
 // import authController from './controllers/auth.routes';
 // import userController from './controllers/user.routes';
 
+require('dotenv').config();
+
+/* eslint-disable import/first */
 import swaggerUi from 'swagger-ui-express';
 import express, { Response, Request } from 'express';
 import { RegisterRoutes } from '../routes';

@@ -1,16 +1,15 @@
 import { Pool, QueryResult } from 'pg';
-import { dbConfig } from '../config/db.config';
 import { getLogger } from '../middlewares/logger';
 
+const dbConfig = {
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  db: process.env.DB,
+  password: process.env.DB_PASSWORD,
+  port: Number(process.env.DB_PORT),
+};
 const logger = getLogger();
-
-const pool = new Pool({
-  user: dbConfig.USER,
-  host: dbConfig.HOST,
-  database: dbConfig.DB,
-  password: dbConfig.PASSWORD,
-  port: dbConfig.PORT,
-});
+const pool = new Pool(dbConfig);
 type QueryParams = ReadonlyArray<string|number>
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function query<T, U extends ReadonlyArray<any> = QueryParams>(
