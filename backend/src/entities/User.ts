@@ -1,12 +1,12 @@
 import {
-  Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate,
+  Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, AfterLoad,
 } from 'typeorm';
 import { hashSync } from 'bcrypt';
 
 @Entity()
 export class User {
   get cryptedPassword(): string {
-    return this.password;
+    return this.#cryptedPwd ?? '';
   }
 
   constructor(username: string, password: string, name: string) {
@@ -19,13 +19,8 @@ export class User {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({
-    unique: true,
-  })
+  @Column({ unique: true })
   username: string;
-
-  @Column()
-  private password: string;
 
   @Column()
   name: string;
@@ -33,11 +28,22 @@ export class User {
   @Column()
   isActive: boolean;
 
+  @Column({ name: 'password' })
+  private password: string;
+
+  #cryptedPwd?: string;
+
   @BeforeInsert()
   @BeforeUpdate()
   hashPassword(): void {
     if (this.password) {
       this.password = hashSync(this.password, 10);
     }
+  }
+
+  @AfterLoad()
+  handlePassword(): void {
+    this.#cryptedPwd = this.password;
+    this.password = '';
   }
 }
