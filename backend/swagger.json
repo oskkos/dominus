@@ -181,6 +181,60 @@
 					}
 				}
 			}
+		},
+		"/user/{userId}/changePassword": {
+			"put": {
+				"operationId": "ChangePassword",
+				"responses": {
+					"204": {
+						"content": {
+							"application/json": {}
+						},
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"User"
+				],
+				"security": [
+					{
+						"apiKey": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"newPwd": {
+										"type": "string"
+									},
+									"oldPwd": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"newPwd",
+									"oldPwd"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
 		}
 	},
 	"servers": [

@@ -7,13 +7,17 @@ import { hashSync } from 'bcrypt';
 
 @Entity()
 export class User {
+  set password(value: string) {
+    this.pwd = value;
+  }
+
   get cryptedPassword(): string {
     return this.#cryptedPwd ?? '';
   }
 
   constructor(username: string, password: string, name: string) {
     this.username = username;
-    this.password = password;
+    this.pwd = password;
     this.name = name;
     this.isActive = true;
   }
@@ -37,22 +41,22 @@ export class User {
   @UpdateDateColumn()
   updated!: Date;
 
-  @Column()
-  private password: string;
+  @Column({ name: 'password' })
+  private pwd: string;
 
   #cryptedPwd?: string;
 
   @BeforeInsert()
   @BeforeUpdate()
   hashPassword(): void {
-    if (this.password) {
-      this.password = hashSync(this.password, 10);
+    if (this.pwd) {
+      this.pwd = hashSync(this.pwd, 10);
     }
   }
 
   @AfterLoad()
   handlePassword(): void {
-    this.#cryptedPwd = this.password;
-    this.password = '';
+    this.#cryptedPwd = this.pwd;
+    this.pwd = '';
   }
 }

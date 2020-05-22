@@ -4,8 +4,7 @@ import { User as EntityUser } from '../entities/User';
 import { EventLog } from '../entities/EventLog';
 
 export async function openById(id: number): Promise<User> {
-  const connection = getConnection();
-  const userRepository = connection.getRepository(EntityUser);
+  const userRepository = getConnection().getRepository(EntityUser);
   const user = await userRepository.findOne({ id });
   if (user) {
     return { id: user.id, username: user.username };
@@ -13,8 +12,7 @@ export async function openById(id: number): Promise<User> {
   throw new Error(`User open failed with id: ${id}`);
 }
 export async function getByUserName(username: string): Promise<UserWithCryptedPassword | null> {
-  const connection = getConnection();
-  const userRepository = connection.getRepository(EntityUser);
+  const userRepository = getConnection().getRepository(EntityUser);
   const user = await userRepository.findOne({ username });
   if (!user) {
     return null;
@@ -33,5 +31,20 @@ export async function addUser(
     const user = await transactionalEntityManager.save(new EntityUser(username, password, name));
     await transactionalEntityManager.save(EventLog.UserAdded(user.id, { username, password: '*****', name }));
     return user;
+  });
+}
+
+export async function changePassword(
+  id: number, password: string,
+): Promise<void> {
+  const userRepository = getConnection().getRepository(EntityUser);
+  const user = await userRepository.findOne({ id });
+  if (!user) {
+    throw new Error(`User open failed with id: ${id}`);
+  }
+  return getConnection().transaction(async (transactionalEntityManager) => {
+    user.password = password;
+    await transactionalEntityManager.save(user);
+    await transactionalEntityManager.save(EventLog.UserPasswordChanged(user.id, { password: '*****' }));
   });
 }
