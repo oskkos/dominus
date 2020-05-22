@@ -1,5 +1,7 @@
 import {
-  Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, AfterLoad,
+  Entity, PrimaryGeneratedColumn, Column,
+  BeforeInsert, BeforeUpdate, AfterLoad,
+  CreateDateColumn, UpdateDateColumn,
 } from 'typeorm';
 import { hashSync } from 'bcrypt';
 
@@ -28,7 +30,14 @@ export class User {
   @Column()
   isActive: boolean;
 
-  @Column({ name: 'password' })
+
+  @CreateDateColumn()
+  created!: Date;
+
+  @UpdateDateColumn()
+  updated!: Date;
+
+  @Column()
   private password: string;
 
   #cryptedPwd?: string;

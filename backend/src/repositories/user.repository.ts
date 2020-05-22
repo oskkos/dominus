@@ -1,6 +1,7 @@
 import { getConnection } from 'typeorm';
 import { UserWithCryptedPassword, User } from '../models/User';
 import { User as EntityUser } from '../entities/User';
+import { EventLog } from '../entities/EventLog';
 
 export async function openById(id: number): Promise<User> {
   const connection = getConnection();
@@ -25,9 +26,12 @@ export async function getByUserName(username: string): Promise<UserWithCryptedPa
   };
 }
 
-export async function addUser(username: string, password: string, name: string): Promise<void> {
-  const connection = getConnection();
-  const userRepository = connection.getRepository(EntityUser);
-  const user = new EntityUser(username, password, name);
-  await userRepository.save(user);
+export async function addUser(
+  username: string, password: string, name: string,
+): Promise<EntityUser> {
+  return getConnection().transaction(async (transactionalEntityManager) => {
+    const user = await transactionalEntityManager.save(new EntityUser(username, password, name));
+    await transactionalEntityManager.save(EventLog.UserAdded(user.id, { username, password: '*****', name }));
+    return user;
+  });
 }

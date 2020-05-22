@@ -33,6 +33,6 @@ export class TypeORMLogger implements Logger {
   }
 
   logSchemaBuild(message: string, _queryRunner?: QueryRunner): void {
-    logger.debug('Schema build.', message);
+    logger.info('Schema modified.', message);
   }
 }
