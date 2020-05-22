@@ -1,5 +1,9 @@
 import {
-  Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn,
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
@@ -33,12 +37,16 @@ export class EventLog {
   }
 
   static UserAdded(
-    userId: number, data: { username: string; password: string; name: string },
+    userId: number,
+    data: { username: string; password: string; name: string },
   ): EventLog {
     return new EventLog('User', userId, 'UserAdded', data);
   }
 
-  static UserPasswordChanged(userId: number, data: { password: string}): EventLog {
+  static UserPasswordChanged(
+    userId: number,
+    data: { password: string },
+  ): EventLog {
     return new EventLog('User', userId, 'UserPasswordChanged', data);
   }
 }

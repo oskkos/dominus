@@ -1,7 +1,12 @@
 import {
-  Entity, PrimaryGeneratedColumn, Column,
-  BeforeInsert, BeforeUpdate, AfterLoad,
-  CreateDateColumn, UpdateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  BeforeInsert,
+  BeforeUpdate,
+  AfterLoad,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { hashSync } from 'bcrypt';
 
@@ -33,7 +38,6 @@ export class User {
 
   @Column()
   isActive: boolean;
-
 
   @CreateDateColumn()
   created!: Date;

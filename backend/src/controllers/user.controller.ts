@@ -1,6 +1,14 @@
 import {
   Body,
-  Controller, Get, Path, Post, Put, Request, Route, Security, Tags,
+  Controller,
+  Get,
+  Path,
+  Post,
+  Put,
+  Request,
+  Route,
+  Security,
+  Tags,
 } from 'tsoa';
 import { Request as ExRequest } from 'express';
 import * as UserService from '../services/user.service';
@@ -35,7 +43,7 @@ export class UserController extends Controller {
   ): Promise<void> {
     const token = decodeToken(getToken(request));
     if (token.id !== userId) {
-      throw new Error('Can\'t change password for other user');
+      throw new Error("Can't change password for other user");
     }
     return UserService.changePassword(userId, data.oldPwd, data.newPwd);
   }

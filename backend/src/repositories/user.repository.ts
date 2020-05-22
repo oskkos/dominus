@@ -11,7 +11,9 @@ export async function openById(id: number): Promise<User> {
   }
   throw new Error(`User open failed with id: ${id}`);
 }
-export async function getByUserName(username: string): Promise<UserWithCryptedPassword | null> {
+export async function getByUserName(
+  username: string,
+): Promise<UserWithCryptedPassword | null> {
   const userRepository = getConnection().getRepository(EntityUser);
   const user = await userRepository.findOne({ username });
   if (!user) {
@@ -25,17 +27,24 @@ export async function getByUserName(username: string): Promise<UserWithCryptedPa
 }
 
 export async function addUser(
-  username: string, password: string, name: string,
+  username: string,
+  password: string,
+  name: string,
 ): Promise<EntityUser> {
   return getConnection().transaction(async (transactionalEntityManager) => {
-    const user = await transactionalEntityManager.save(new EntityUser(username, password, name));
-    await transactionalEntityManager.save(EventLog.UserAdded(user.id, { username, password: '*****', name }));
+    const user = await transactionalEntityManager.save(
+      new EntityUser(username, password, name),
+    );
+    await transactionalEntityManager.save(
+      EventLog.UserAdded(user.id, { username, password: '*****', name }),
+    );
     return user;
   });
 }
 
 export async function changePassword(
-  id: number, password: string,
+  id: number,
+  password: string,
 ): Promise<void> {
   const userRepository = getConnection().getRepository(EntityUser);
   const user = await userRepository.findOne({ id });
@@ -45,6 +54,8 @@ export async function changePassword(
   return getConnection().transaction(async (transactionalEntityManager) => {
     user.password = password;
     await transactionalEntityManager.save(user);
-    await transactionalEntityManager.save(EventLog.UserPasswordChanged(user.id, { password: '*****' }));
+    await transactionalEntityManager.save(
+      EventLog.UserPasswordChanged(user.id, { password: '*****' }),
+    );
   });
 }

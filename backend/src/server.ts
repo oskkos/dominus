@@ -37,11 +37,10 @@ getConnectionOptions().then((connectionOptions) => {
       next();
     });
 
-    app.use('/docs', swaggerUi.serve, async (_req: Request, res: Response) => res.send(
-      swaggerUi.generateHTML(await import('../swagger.json')),
-    ));
+    app.use('/docs', swaggerUi.serve, async (_req: Request, res: Response) =>
+      res.send(swaggerUi.generateHTML(await import('../swagger.json'))),
+    );
     RegisterRoutes(app);
-
 
     // set port, listen for requests
     const PORT = process.env.PORT || 7000;

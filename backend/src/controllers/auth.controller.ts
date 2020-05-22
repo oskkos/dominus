@@ -1,6 +1,4 @@
-import {
-  Body, Controller, Post, Route, Tags,
-} from 'tsoa';
+import { Body, Controller, Post, Route, Tags } from 'tsoa';
 import { signin } from '../services/auth.service';
 import { AuthUser } from '../models/User';
 import { AuthToken } from '../models/Auth';

@@ -1,16 +1,17 @@
 import { Request } from 'express';
-import {
-  decode,
-  sign, verify, VerifyErrors,
-} from 'jsonwebtoken';
+import { decode, sign, verify, VerifyErrors } from 'jsonwebtoken';
 import { User } from '../models/User';
 import { getLogger } from './logger';
 import { AuthToken } from '../models/Auth';
 
 const secret = process.env.JWT_SECRET_KEY as string;
 
-export const getToken = (request: Request): string => request.body.token || request.query.token || request.headers['x-access-token'];
-export const decodeToken = (token: string): AuthToken => decode(token) as AuthToken;
+export const getToken = (request: Request): string =>
+  request.body.token ||
+  request.query.token ||
+  request.headers['x-access-token'];
+export const decodeToken = (token: string): AuthToken =>
+  decode(token) as AuthToken;
 export async function expressAuthentication(
   request: Request,
   securityName: string,
@@ -38,13 +39,18 @@ export async function expressAuthentication(
           }
         });
         resolve(decoded);
-        getLogger().trace(`User ${(decoded as AuthToken).username} authenticated`);
+        getLogger().trace(
+          `User ${(decoded as AuthToken).username} authenticated`,
+        );
       }
     });
   });
 }
 
 export function signToken(user: User): string {
-  const payload: Omit<AuthToken, 'accessToken'> = { id: user.id, username: user.username };
+  const payload: Omit<AuthToken, 'accessToken'> = {
+    id: user.id,
+    username: user.username,
+  };
   return sign(payload, secret, { expiresIn: 86400 /* 24 hours */ });
 }
