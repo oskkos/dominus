@@ -10,8 +10,8 @@
         "description": "AuthToken is used for granting access into dominus and identifying the user",
         "properties": {
           "id": {
-            "type": "number",
-            "format": "double"
+            "type": "integer",
+            "format": "int32"
           },
           "username": {
             "type": "string"
@@ -22,9 +22,15 @@
         },
         "required": ["id", "username", "accessToken"],
         "type": "object",
-        "additionalProperties": false
+        "additionalProperties": false,
+        "example": {
+          "id": 82,
+          "username": "oskkos",
+          "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJvc2trb3MiLCJpYXQiOjE1OTAyMjMxOTgsImV4cCI6MTU5MDMwOTU5OH0.tP-5h7NmH9aafoIKACrlkFZkLpY3slRRdJbTMk8jMHw"
+        }
       },
       "AuthUser": {
+        "description": "AuthUser is used for authenticating into dominus",
         "properties": {
           "username": {
             "type": "string"
@@ -35,13 +41,18 @@
         },
         "required": ["username", "password"],
         "type": "object",
-        "additionalProperties": false
+        "additionalProperties": false,
+        "example": {
+          "username": "oskkos",
+          "password": "s3cret"
+        }
       },
       "User": {
+        "description": "Describes a user in a dominus",
         "properties": {
           "id": {
-            "type": "number",
-            "format": "double"
+            "type": "integer",
+            "format": "int32"
           },
           "username": {
             "type": "string"
@@ -49,7 +60,51 @@
         },
         "required": ["id", "username"],
         "type": "object",
-        "additionalProperties": false
+        "additionalProperties": false,
+        "example": {
+          "id": 82,
+          "username": "oskkos"
+        }
+      },
+      "AddUserBody": {
+        "description": "Payload for adding a new user",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": ["username", "password", "name"],
+        "type": "object",
+        "additionalProperties": false,
+        "example": {
+          "username": "oskkos",
+          "password": "s3cret",
+          "name": "Oskari Kosonen"
+        }
+      },
+      "ChangePasswordBody": {
+        "description": "Payload for changing password",
+        "properties": {
+          "oldPwd": {
+            "type": "string"
+          },
+          "newPwd": {
+            "type": "string"
+          }
+        },
+        "required": ["oldPwd", "newPwd"],
+        "type": "object",
+        "additionalProperties": false,
+        "example": {
+          "oldPwd": "too_easy",
+          "newPwd": "s3cret_p455word"
+        }
       }
     },
     "securitySchemes": {
@@ -154,19 +209,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "password": {
-                    "type": "string"
-                  },
-                  "username": {
-                    "type": "string"
-                  }
-                },
-                "required": ["name", "password", "username"],
-                "type": "object"
+                "$ref": "#/components/schemas/AddUserBody"
               }
             }
           }
@@ -210,16 +253,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "properties": {
-                  "newPwd": {
-                    "type": "string"
-                  },
-                  "oldPwd": {
-                    "type": "string"
-                  }
-                },
-                "required": ["newPwd", "oldPwd"],
-                "type": "object"
+                "$ref": "#/components/schemas/ChangePasswordBody"
               }
             }
           }

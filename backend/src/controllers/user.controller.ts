@@ -31,9 +31,7 @@ export class UserController extends Controller {
    * Add new user
    */
   @Post()
-  public addUser(
-    @Body() data: { username: string; password: string; name: string },
-  ): Promise<void> {
+  public addUser(@Body() data: AddUserBody): Promise<void> {
     return UserService.addUser(data.username, data.password, data.name);
   }
 
@@ -49,7 +47,7 @@ export class UserController extends Controller {
   public async changePassword(
     @Request() request: ExRequest,
     @Path() userId: number,
-    @Body() data: { oldPwd: string; newPwd: string },
+    @Body() data: ChangePasswordBody,
   ): Promise<void> {
     const token = decodeToken(getToken(request));
     if (token.id !== userId) {
@@ -57,4 +55,30 @@ export class UserController extends Controller {
     }
     return UserService.changePassword(userId, data.oldPwd, data.newPwd);
   }
+}
+
+/**
+ * Payload for adding a new user
+ * @example {
+ *   "username": "oskkos",
+ *   "password": "s3cret",
+ *   "name": "Oskari Kosonen"
+ * }
+ */
+interface AddUserBody {
+  username: string;
+  password: string;
+  name: string;
+}
+
+/**
+ * Payload for changing password
+ * @example {
+ *   "oldPwd": "too_easy",
+ *   "newPwd": "s3cret_p455word"
+ * }
+ */
+interface ChangePasswordBody {
+  oldPwd: string;
+  newPwd: string;
 }
