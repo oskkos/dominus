@@ -1,8 +1,7 @@
 import { compareSync } from 'bcrypt';
 import { getByUserName } from '../repositories/user.repository';
 import { signToken } from '../middlewares/auth.jwt';
-import { AuthUser } from '../models/User';
-import { AuthToken } from '../models/Auth';
+import { AuthToken, AuthUser } from '../models/Auth';
 
 export async function signin(input: AuthUser): Promise<AuthToken> {
   const user = await getByUserName(input.username);

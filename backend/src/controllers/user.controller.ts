@@ -27,6 +27,9 @@ export class UserController extends Controller {
     return UserService.openUser(token.id);
   }
 
+  /**
+   * Add new user
+   */
   @Post()
   public addUser(
     @Body() data: { username: string; password: string; name: string },
@@ -34,6 +37,13 @@ export class UserController extends Controller {
     return UserService.addUser(data.username, data.password, data.name);
   }
 
+  /**
+   * Entry point for changing password for current user
+   * @param request Used to get token
+   * @param userId Id of the current user, should match with the tokens user
+   * @param data Object containing oldPwd and newPwd string fields
+   * @example userId 20
+   */
   @Security('apiKey')
   @Put('{userId}/changePassword')
   public async changePassword(

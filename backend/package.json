@@ -8,7 +8,7 @@
     "tsc": "tsc",
     "tsoa": "tsoa",
     "watch": "tsc --watch",
-    "lint": "eslint **/*.ts --fix",
+    "lint": "eslint **/*.ts --fix && speccy lint swagger.json -s server-trailing-slash -s info-contact -s openapi-tags",
     "build": "tsoa spec-and-routes && tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "generate-client": "openapi-generator generate -g typescript-fetch --additional-properties=typescriptThreePlus=true -i ./swagger.json -o ../frontend/src/api"
@@ -18,7 +18,7 @@
       "pre-commit": "pretty-quick --staged"
     }
   },
-  "author": "",
+  "author": "Oskari Kosonen <o.kosonen@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^4.0.1",
@@ -58,6 +58,7 @@
     "nodemon": "^2.0.4",
     "prettier": "^2.0.5",
     "pretty-quick": "^2.0.1",
+    "speccy": "^0.11.0",
     "ts-node": "^8.10.1",
     "typescript": "^3.8.3"
   }

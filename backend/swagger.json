@@ -1,245 +1,235 @@
 {
-	"components": {
-		"examples": {},
-		"headers": {},
-		"parameters": {},
-		"requestBodies": {},
-		"responses": {},
-		"schemas": {
-			"AuthToken": {
-				"properties": {
-					"id": {
-						"type": "number",
-						"format": "double"
-					},
-					"username": {
-						"type": "string"
-					},
-					"accessToken": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"id",
-					"username",
-					"accessToken"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"AuthUser": {
-				"properties": {
-					"username": {
-						"type": "string"
-					},
-					"password": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"username",
-					"password"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"User": {
-				"properties": {
-					"id": {
-						"type": "number",
-						"format": "double"
-					},
-					"username": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"id",
-					"username"
-				],
-				"type": "object",
-				"additionalProperties": false
-			}
-		},
-		"securitySchemes": {
-			"apiKey": {
-				"type": "apiKey",
-				"in": "header",
-				"name": "x-access-token"
-			}
-		}
-	},
-	"info": {
-		"title": "dominus-backend",
-		"version": "1.0.0",
-		"license": {
-			"name": "ISC"
-		}
-	},
-	"openapi": "3.0.0",
-	"paths": {
-		"/auth/signin": {
-			"post": {
-				"operationId": "Signin",
-				"responses": {
-					"200": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/AuthToken"
-								}
-							}
-						},
-						"description": "Ok"
-					}
-				},
-				"description": "Authenticates user into dominus. Supply proper username and password.",
-				"tags": [
-					"Auth"
-				],
-				"security": [],
-				"parameters": [],
-				"requestBody": {
-					"required": true,
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/AuthUser"
-							}
-						}
-					}
-				}
-			}
-		},
-		"/user/self": {
-			"get": {
-				"operationId": "GetSelf",
-				"responses": {
-					"200": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/User"
-								}
-							}
-						},
-						"description": "Ok"
-					}
-				},
-				"description": "Entry point for getting self",
-				"tags": [
-					"User"
-				],
-				"security": [
-					{
-						"apiKey": []
-					}
-				],
-				"parameters": []
-			}
-		},
-		"/user": {
-			"post": {
-				"operationId": "AddUser",
-				"responses": {
-					"204": {
-						"content": {
-							"application/json": {}
-						},
-						"description": "No content"
-					}
-				},
-				"tags": [
-					"User"
-				],
-				"security": [],
-				"parameters": [],
-				"requestBody": {
-					"required": true,
-					"content": {
-						"application/json": {
-							"schema": {
-								"properties": {
-									"name": {
-										"type": "string"
-									},
-									"password": {
-										"type": "string"
-									},
-									"username": {
-										"type": "string"
-									}
-								},
-								"required": [
-									"name",
-									"password",
-									"username"
-								],
-								"type": "object"
-							}
-						}
-					}
-				}
-			}
-		},
-		"/user/{userId}/changePassword": {
-			"put": {
-				"operationId": "ChangePassword",
-				"responses": {
-					"204": {
-						"content": {
-							"application/json": {}
-						},
-						"description": "No content"
-					}
-				},
-				"tags": [
-					"User"
-				],
-				"security": [
-					{
-						"apiKey": []
-					}
-				],
-				"parameters": [
-					{
-						"in": "path",
-						"name": "userId",
-						"required": true,
-						"schema": {
-							"format": "double",
-							"type": "number"
-						}
-					}
-				],
-				"requestBody": {
-					"required": true,
-					"content": {
-						"application/json": {
-							"schema": {
-								"properties": {
-									"newPwd": {
-										"type": "string"
-									},
-									"oldPwd": {
-										"type": "string"
-									}
-								},
-								"required": [
-									"newPwd",
-									"oldPwd"
-								],
-								"type": "object"
-							}
-						}
-					}
-				}
-			}
-		}
-	},
-	"servers": [
-		{
-			"url": "http://localhost:7000/"
-		}
-	]
+  "components": {
+    "examples": {},
+    "headers": {},
+    "parameters": {},
+    "requestBodies": {},
+    "responses": {},
+    "schemas": {
+      "AuthToken": {
+        "description": "AuthToken is used for granting access into dominus and identifying the user",
+        "properties": {
+          "id": {
+            "type": "number",
+            "format": "double"
+          },
+          "username": {
+            "type": "string"
+          },
+          "accessToken": {
+            "type": "string"
+          }
+        },
+        "required": ["id", "username", "accessToken"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "AuthUser": {
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": ["username", "password"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "User": {
+        "properties": {
+          "id": {
+            "type": "number",
+            "format": "double"
+          },
+          "username": {
+            "type": "string"
+          }
+        },
+        "required": ["id", "username"],
+        "type": "object",
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "apiKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-access-token"
+      }
+    }
+  },
+  "info": {
+    "title": "dominus-backend",
+    "version": "1.0.0",
+    "license": {
+      "name": "ISC"
+    }
+  },
+  "openapi": "3.0.0",
+  "paths": {
+    "/auth/signin": {
+      "post": {
+        "operationId": "Signin",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthToken"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": 82,
+                      "username": "oskkos",
+                      "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJvc2trb3MiLCJpYXQiOjE1OTAyMjMxOTgsImV4cCI6MTU5MDMwOTU5OH0.tP-5h7NmH9aafoIKACrlkFZkLpY3slRRdJbTMk8jMHw"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Ok"
+          }
+        },
+        "description": "Authenticates user into dominus. Supply proper username and password.",
+        "tags": ["Auth"],
+        "security": [],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthUser"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/self": {
+      "get": {
+        "operationId": "GetSelf",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            },
+            "description": "Ok"
+          }
+        },
+        "description": "Entry point for getting self",
+        "tags": ["User"],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "parameters": []
+      }
+    },
+    "/user": {
+      "post": {
+        "operationId": "AddUser",
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "No content"
+          }
+        },
+        "description": "Add new user",
+        "tags": ["User"],
+        "security": [],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "username": {
+                    "type": "string"
+                  }
+                },
+                "required": ["name", "password", "username"],
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/{userId}/changePassword": {
+      "put": {
+        "operationId": "ChangePassword",
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "No content"
+          }
+        },
+        "description": "Entry point for changing password for current user",
+        "tags": ["User"],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Id of the current user, should match with the tokens user",
+            "example": 20,
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "schema": {
+              "format": "double",
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Object containing oldPwd and newPwd string fields",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "newPwd": {
+                    "type": "string"
+                  },
+                  "oldPwd": {
+                    "type": "string"
+                  }
+                },
+                "required": ["newPwd", "oldPwd"],
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:7000/"
+    }
+  ]
 }
