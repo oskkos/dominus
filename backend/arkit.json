@@ -40,6 +40,7 @@
       "groups": [
         {
           "first": true,
+          "type": "Server & Router",
           "components": ["Component"]
         },
         {
@@ -65,10 +66,6 @@
         {
           "type": "Entities",
           "components": ["Entities"]
-        },
-        {
-          "type": "Dependencies",
-          "components": ["Dependency"]
         }
       ]
     }
