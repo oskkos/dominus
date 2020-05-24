@@ -1,16 +1,8 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, Entity } from 'typeorm';
+import { EntityWithIdAndTimestamps } from './EntityWithIdAndTimestamps';
 
 @Entity()
-export class EventLog {
-  @PrimaryGeneratedColumn()
-  id!: number;
-
+export class EventLog extends EntityWithIdAndTimestamps {
   @Column()
   entity!: string;
 
@@ -23,13 +15,8 @@ export class EventLog {
   @Column({ type: 'json' })
   eventData!: {};
 
-  @CreateDateColumn()
-  created!: Date;
-
-  @UpdateDateColumn()
-  updated!: Date;
-
   constructor(entity: string, entityId: number, event: string, eventData: {}) {
+    super();
     this.entity = entity;
     this.entityId = entityId;
     this.event = event;

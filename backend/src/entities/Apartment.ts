@@ -1,16 +1,8 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, Entity } from 'typeorm';
+import { EntityWithIdAndTimestamps } from './EntityWithIdAndTimestamps';
 
 @Entity()
-export class Apartment {
-  @PrimaryGeneratedColumn()
-  id!: number;
-
+export class Apartment extends EntityWithIdAndTimestamps {
   @Column()
   apartmentDescription!: string;
 
@@ -28,10 +20,4 @@ export class Apartment {
 
   @Column()
   postDistrict!: string;
-
-  @CreateDateColumn()
-  created!: Date;
-
-  @UpdateDateColumn()
-  updated!: Date;
 }

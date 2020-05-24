@@ -1,17 +1,9 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  BeforeInsert,
-  BeforeUpdate,
-  AfterLoad,
-  CreateDateColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Entity, Column, BeforeInsert, BeforeUpdate, AfterLoad } from 'typeorm';
 import { hashSync } from 'bcrypt';
+import { EntityWithIdAndTimestamps } from './EntityWithIdAndTimestamps';
 
 @Entity()
-export class User {
+export class User extends EntityWithIdAndTimestamps {
   set password(value: string) {
     this.pwd = value;
   }
@@ -21,14 +13,12 @@ export class User {
   }
 
   constructor(username: string, password: string, name: string) {
+    super();
     this.username = username;
     this.pwd = password;
     this.name = name;
     this.isActive = true;
   }
-
-  @PrimaryGeneratedColumn()
-  id!: number;
 
   @Column({ unique: true })
   username: string;
@@ -38,12 +28,6 @@ export class User {
 
   @Column()
   isActive: boolean;
-
-  @CreateDateColumn()
-  created!: Date;
-
-  @UpdateDateColumn()
-  updated!: Date;
 
   @Column({ name: 'password' })
   private pwd: string;
