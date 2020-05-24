@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="528px" preserveAspectRatio="none" style="width:732px;height:528px;" version="1.1" viewBox="0 0 732 528" width="732px" zoomAndPan="magnify"><defs/><g><!--MD5=[81da1a12a6ffceb0b7ff692a5ac8efc2]
+cluster Server & Router--><path d="M417,24 L520,24 A4.5,4.5 0 0 1 523,27 L530,44.4844 L579,44.4844 A3,3 0 0 1 582,47.4844 L582,96 A3,3 0 0 1 579,99 L417,99 A3,3 0 0 1 414,96 L414,27 A3,3 0 0 1 417,24 " fill="#FFFFFF" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="414" x2="530" y1="44.4844" y2="44.4844"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="103" x="418" y="38.0059">Server &amp; Router</text><!--MD5=[ed1d20ea533a2a0e7df5ba3c35e56ced]
+cluster Controllers--><path d="M239,123 L313,123 A4.5,4.5 0 0 1 316,126 L323,143.4844 L486,143.4844 A3,3 0 0 1 489,146.4844 L489,203 A3,3 0 0 1 486,206 L239,206 A3,3 0 0 1 236,203 L236,126 A3,3 0 0 1 239,123 " fill="#FFFFFF" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="236" x2="323" y1="143.4844" y2="143.4844"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="74" x="240" y="137.0059">Controllers</text><!--MD5=[01444e0f60f2f1f3466acc3cffdc895e]
+cluster Middlewares--><path d="M471,329 L552,329 A4.5,4.5 0 0 1 555,332 L562,349.4844 L693,349.4844 A3,3 0 0 1 696,352.4844 L696,509 A3,3 0 0 1 693,512 L471,512 A3,3 0 0 1 468,509 L468,332 A3,3 0 0 1 471,329 " fill="#FFFFFF" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="468" x2="562" y1="349.4844" y2="349.4844"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="81" x="472" y="343.0059">Middlewares</text><!--MD5=[027ebfd53c01aea08f474edbf35d0797]
+cluster Models--><path d="M25,433 L72,433 A4.5,4.5 0 0 1 75,436 L82,453.4844 L205,453.4844 A3,3 0 0 1 208,456.4844 L208,513 A3,3 0 0 1 205,516 L25,516 A3,3 0 0 1 22,513 L22,436 A3,3 0 0 1 25,433 " fill="#FFFFFF" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="22" x2="82" y1="453.4844" y2="453.4844"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="47" x="26" y="447.0059">Models</text><!--MD5=[cdfd548b3455e70392372b1f27091970]
+cluster Services--><path d="M223,230 L280,230 A4.5,4.5 0 0 1 283,233 L290,250.4844 L471,250.4844 A3,3 0 0 1 474,253.4844 L474,302 A3,3 0 0 1 471,305 L223,305 A3,3 0 0 1 220,302 L220,233 A3,3 0 0 1 223,230 " fill="#FFFFFF" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="220" x2="290" y1="250.4844" y2="250.4844"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="57" x="224" y="244.0059">Services</text><!--MD5=[600c2d25b6889bd4e9f6b335204b22ae]
+cluster Repositories--><path d="M253,332 L337,332 A4.5,4.5 0 0 1 340,335 L347,352.4844 L397,352.4844 A3,3 0 0 1 400,355.4844 L400,406 A3,3 0 0 1 397,409 L253,409 A3,3 0 0 1 250,406 L250,335 A3,3 0 0 1 253,332 " fill="#FFFFFF" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="250" x2="347" y1="352.4844" y2="352.4844"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="84" x="254" y="346.0059">Repositories</text><!--MD5=[114f4823940f317c08f5bedd633c9afd]
+cluster Entities--><path d="M235,433 L285,433 A4.5,4.5 0 0 1 288,436 L295,453.4844 L441,453.4844 A3,3 0 0 1 444,456.4844 L444,513 A3,3 0 0 1 441,516 L235,516 A3,3 0 0 1 232,513 L232,436 A3,3 0 0 1 235,433 " fill="#FFFFFF" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="232" x2="295" y1="453.4844" y2="453.4844"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="50" x="236" y="447.0059">Entities</text><ellipse cx="459.163" cy="70.242" fill="#F8F8F8" rx="29.163" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="37" x="440.663" y="73.9842">routes</text><ellipse cx="533.9914" cy="70.242" fill="#F8F8F8" rx="31.9914" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="41" x="513.4914" y="73.9842">server</text><!--MD5=[d06a8b9102defe736655824e5da7ce2d]
+entity _auth_controller--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="103" x="369.5" y="156"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="83" x="379.5" y="178.0059">auth.controller</text><!--MD5=[d86e588f3408319142292d1b5d5a3230]
+entity _user_controller--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="103" x="252.5" y="156"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="83" x="262.5" y="178.0059">user.controller</text><ellipse cx="518.8198" cy="379.242" fill="#F8F8F8" rx="34.8198" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="45" x="496.3198" y="382.9842">auth.jwt</text><ellipse cx="636.9558" cy="483.242" fill="#F8F8F8" rx="28.4558" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="36" x="618.9558" y="486.9842">logger</text><!--MD5=[f24447cfbda88c07e91dd3d7c0c3db79]
+entity _TypeORMLogger--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="112" x="568" y="362"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="92" x="578" y="384.0059">TypeORMLogger</text><!--MD5=[090835527c10669de3872c7ae72a3e7a]
+entity _Auth--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="45" x="146.5" y="466"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="25" x="156.5" y="488.0059">Auth</text><!--MD5=[4c029acf0569c1dbcb6e2b5523401c80]
+entity _models_User--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="94" x="38" y="466"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="74" x="48" y="488.0059">models/User</text><ellipse cx="405.7904" cy="276.242" fill="#F8F8F8" rx="51.7904" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="69" x="371.2904" y="279.9842">auth.service</text><ellipse cx="287.7904" cy="276.242" fill="#F8F8F8" rx="51.7904" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="69" x="253.2904" y="279.9842">user.service</text><ellipse cx="325.2159" cy="379.2432" fill="#F8F8F8" rx="59.2159" ry="14.2432" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="86" x="282.2159" y="382.9854">user.repository</text><!--MD5=[147a91f99759f6cb8c425b4553f458eb]
+entity _entities_User--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="93" x="248.5" y="466"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="73" x="258.5" y="488.0059">entities/User</text><!--MD5=[df7b7da2504707e2c9c337bf9ecd3425]
+entity _EventLog--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="72" x="356" y="466"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="52" x="366" y="488.0059">EventLog</text><!--MD5=[aaf6bb04ec7f0ad0e7dffbf36b8a8be6]
+link _auth_controller to _Auth--><path d="M402.75,190.183 C391.751,198.911 377.001,208.911 362,214 C347.56,218.899 236.579,212.078 225,222 C153.958,282.876 160.292,410.26 166.022,460.7393 " fill="none" id="_auth_controller-&gt;_Auth" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="166.642,465.944,169.5487,456.5338,166.0502,460.9791,161.6049,457.4807,166.642,465.944" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[d54f8a898f2b2f93b3b33fade19514d3]
+link _auth_controller to auth.service--><path d="M418.59,190.227 C415.835,208.781 411.344,239.019 408.536,257.921 " fill="none" id="_auth_controller-&gt;auth.service" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="407.792,262.933,413.0704,254.618,408.5263,257.9872,405.1571,253.4431,407.792,262.933" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[562c46d0512001f86390504dff043105]
+link _auth_controller to logger--><path d="M472.677,185.695 C536.057,203.116 640.755,242.607 687,321 C708.679,357.749 700.739,376.606 687,417 C680.269,436.7887 664.814,455.2579 652.855,467.4128 " fill="none" id="_auth_controller-&gt;logger" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="649.269,470.9768,658.4723,467.4699,652.8155,467.4523,652.8331,461.7955,649.269,470.9768" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[572c719d8e046331fbd67b721e6b8c15]
+link auth.jwt to _Auth--><path d="M495.63,388.808 C470.997,397.654 430.868,410.833 395,417 C360.352,422.958 269.724,412.153 237,425 C217.118,432.8056 198.825,448.8772 186.232,461.9708 " fill="none" id="auth.jwt-&gt;_Auth" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="182.511,465.9263,191.5906,462.1104,185.9364,462.2839,185.7628,456.6298,182.511,465.9263" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[d2d7d09a7514e225210c9e2c095de26d]
+link auth.jwt to logger--><path d="M531.825,391.384 C540.12,398.727 551.166,408.464 561,417 C581.254,434.5811 604.738,454.6123 620.178,467.7351 " fill="none" id="auth.jwt-&gt;logger" style="stroke: #000000; stroke-width: 0.5; stroke-dasharray: 7.0,7.0;"/><polygon fill="#000000" points="624.311,471.2454,620.0415,462.3701,620.5003,468.0083,614.8621,468.4671,624.311,471.2454" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[224bc9a7bec10d656533ed895f4a5b22]
+link auth.jwt to _models_User--><path d="M495.654,388.948 C471.039,397.909 430.926,411.18 395,417 C366.908,421.551 164.964,413.348 139,425 C121.905,432.6719 107.599,448.5392 98.0157,461.5888 " fill="none" id="auth.jwt-&gt;_models_User" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="94.9496,465.8904,103.4306,460.8832,97.8517,461.8188,96.916,456.2398,94.9496,465.8904" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[32ca86990d707716a406822f99e0a40d]
+link auth.service to _Auth--><path d="M391.429,288.547 C380.032,296.892 363.416,307.609 347,313 C327.503,319.403 271.973,309.464 255,321 C215.547,347.815 229.717,375.053 207,417 C198.85,432.0486 189.098,448.7054 181.513,461.3897 " fill="none" id="auth.service-&gt;_Auth" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="178.824,465.8728,186.8833,460.2118,181.3956,461.5848,180.0226,456.0971,178.824,465.8728" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[9e9f16af2e1b4bb8d9144e8ef5210e61]
+link auth.service to auth.jwt--><path d="M419.406,288.983 C440.1,307.479 479.782,342.947 502.307,363.08 " fill="none" id="auth.service-&gt;auth.jwt" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="506.305,366.653,502.2588,357.6737,502.5765,363.3216,496.9286,363.6393,506.305,366.653" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[1383f3e222429f0733e643250a9c4b0e]
+link auth.service to user.repository--><path d="M396.39,288.983 C382.071,306.837 355.068,340.508 338.688,360.932 " fill="none" id="auth.service-&gt;user.repository" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="335.363,365.078,344.1148,360.5607,338.4917,361.1778,337.8745,355.5548,335.363,365.078" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[a6574b0883c99c33d1c1e34f472f0782]
+link routes to _auth_controller--><path d="M454.492,82.983 C448.194,99.721 436.668,130.357 428.92,150.95 " fill="none" id="routes-&gt;_auth_controller" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="427.134,155.697,434.0486,148.6835,428.8957,151.0176,426.5616,145.8648,427.134,155.697" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[562440ee5b2be334a30381992739c0d2]
+link routes to auth.jwt--><path d="M467.176,82.788 C472.741,91.355 479.826,103.43 484,115 C515.853,203.298 519.172,317.674 519.201,360.659 " fill="none" id="routes-&gt;auth.jwt" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="519.189,365.775,523.2096,356.7842,519.2004,360.775,515.2096,356.7659,519.189,365.775" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[c3d2556c4d629c2bc3d7bb124fdead71]
+link routes to _user_controller--><path d="M436.655,78.571 C416.209,86.076 385.635,98.786 362,115 C346.729,125.476 331.88,140.182 321.03,152.032 " fill="none" id="routes-&gt;_user_controller" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="317.508,155.931,326.5093,151.9338,320.8597,152.2207,320.5728,146.5711,317.508,155.931" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[58b1ddf9e3fd87978458e42747798e8d]
+link <b>server</b> to _Auth--><path d="M525.189,82.757 C518.085,91.212 507.28,101.974 495,107 C468.867,117.695 265.623,101.179 241,115 C120.15,182.833 150.767,392.67 164.288,460.5661 " fill="none" id="&lt;b&gt;server&lt;/b&gt;-&gt;_Auth" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="165.307,465.5787,167.4333,455.9621,164.3106,460.679,159.5937,457.5563,165.307,465.5787" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[322b45c47471d12b6d49db8397c5ba50]
+link <b>server</b> to auth.jwt--><path d="M535.697,83.18 C540.351,118.794 552.122,225.733 539,313 C536.489,329.698 530.542,348.025 525.781,360.95 " fill="none" id="&lt;b&gt;server&lt;/b&gt;-&gt;auth.jwt" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="523.959,365.795,530.871,358.779,525.719,361.115,523.383,355.963,523.959,365.795" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[5dcf67e50701372d1e4b38ad174e1bd8]
+link <b>server</b> to logger--><path d="M547.084,82.176 C556.562,90.64 569.353,102.848 579,115 C645.588,198.874 675.156,217.865 704,321 C715.492,362.09 720.626,377.706 704,417 C694.591,439.2376 673.439,457.6077 657.401,469.0797 " fill="none" id="&lt;b&gt;server&lt;/b&gt;-&gt;logger" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="653.027,472.1299,662.6973,470.2629,657.1283,469.2699,658.1213,463.7009,653.027,472.1299" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[918f1540acef5cbfe8e12ed9833e65d6]
+link <b>server</b> to _models_User--><path d="M525.199,82.782 C518.101,91.251 507.298,102.019 495,107 C478.003,113.884 179.871,104.269 165,115 C52.8718,195.913 71.6066,394.567 81.3475,460.408 " fill="none" id="&lt;b&gt;server&lt;/b&gt;-&gt;_models_User" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="82.1446,465.6403,84.7436,456.1405,81.3916,460.6973,76.8348,457.3453,82.1446,465.6403" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[b5550d8c7cbc955c7a41f0bf9d55f796]
+link <b>server</b> to routes--><path d="M501.659,70 C498.814,70 495.969,70 493.125,70 " fill="none" id="&lt;b&gt;server&lt;/b&gt;-&gt;routes" style="stroke: #000000; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#000000" points="488.004,70,497.004,74,493.004,70,497.004,66,488.004,70" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[b7da318761176cd6308606b45640b193]
+link <b>server</b> to _TypeORMLogger--><path d="M539.805,83.14 C543.84,91.873 549.163,104.001 553,115 C583.75,203.146 609.292,311.724 619.375,356.818 " fill="none" id="&lt;b&gt;server&lt;/b&gt;-&gt;_TypeORMLogger" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="620.472,361.744,622.422,352.0901,619.3861,356.8633,614.6129,353.8275,620.472,361.744" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[e740ba654b198251af9249c33f84db62]
+link _TypeORMLogger to logger--><path d="M626.089,396.388 C628.477,415.125 632.369,445.6632 634.802,464.7523 " fill="none" id="_TypeORMLogger-&gt;logger" style="stroke: #000000; stroke-width: 0.5; stroke-dasharray: 7.0,7.0;"/><polygon fill="#000000" points="635.447,469.8135,638.2771,460.38,634.8149,464.8536,630.3413,461.3914,635.447,469.8135" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[f9d07b912afd61cfb43e6511e1d68859]
+link _user_controller to auth.jwt--><path d="M321.926,190.093 C332.735,198.791 347.235,208.791 362,214 C384.486,221.933 450.275,207.237 469,222 C512.07,255.956 518.624,327.277 519.236,360.401 " fill="none" id="_user_controller-&gt;auth.jwt" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="519.289,365.752,523.2014,356.7136,519.2404,360.7522,515.2017,356.7913,519.289,365.752" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[0fb2ab3080e68b16e7150866435982e3]
+link _user_controller to _models_User--><path d="M252.224,186.703 C229.7,194.171 204.14,205.478 185,222 C111,285.879 91.514,410.979 86.5902,460.7955 " fill="none" id="_user_controller-&gt;_models_User" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="86.108,465.9346,90.9314,457.3477,86.5751,460.9565,82.9664,456.6003,86.108,465.9346" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[097b81be3c6bf7c7e3a5dba365f1a503]
+link _user_controller to user.service--><path d="M301.429,190.227 C298.49,208.781 293.7,239.019 290.706,257.921 " fill="none" id="_user_controller-&gt;user.service" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="289.912,262.933,295.2698,254.669,290.6936,257.9945,287.3681,253.4183,289.912,262.933" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[91323e5e891003a8aa47e6c2bae4dadc]
+link user.repository to _entities_User--><path d="M321.078,393.335 C316.012,410.559 307.137,440.7345 301.165,461.0392 " fill="none" id="user.repository-&gt;_entities_User" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="299.713,465.9749,306.0899,458.4692,301.1238,461.1781,298.4149,456.212,299.713,465.9749" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[8b3a2cc741c76eb341206bb75debbab7]
+link user.repository to _EventLog--><path d="M333.486,392.918 C344.86,410.235 365.173,441.1593 378.619,461.6284 " fill="none" id="user.repository-&gt;_EventLog" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="381.378,465.829,379.7795,456.1107,378.6327,461.6501,373.0933,460.5033,381.378,465.829" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[268a1c9652f8bd851d1a6e5346c68370]
+link user.repository to _models_User--><path d="M287.379,389.819 C257.522,397.511 214.683,408.326 177,417 C160.181,420.871 154.063,416.575 139,425 C122.967,433.9674 108.849,449.2897 99.074,461.7909 " fill="none" id="user.repository-&gt;_models_User" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="95.9288,465.909,104.5704,461.1843,98.9636,461.9353,98.2125,456.3286,95.9288,465.909" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[b64e42995474d859eb56ab10f112be97]
+link user.service to _models_User--><path d="M265.58,287.874 C250.403,295.844 230.393,307.581 215,321 C164.98,364.604 119.465,429.1 97.9932,461.6405 " fill="none" id="user.service-&gt;_models_User" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="95.2483,465.8255,103.5291,460.4936,97.9905,461.6446,96.8396,456.106,95.2483,465.8255" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[063e2d6f822dd6550b1063ec9215e714]
+link user.service to user.repository--><path d="M292.39,288.983 C298.813,306.517 310.824,339.304 318.34,359.819 " fill="none" id="user.service-&gt;user.repository" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="320.147,364.754,320.8075,354.9273,318.4273,360.059,313.2955,357.6789,320.147,364.754" style="stroke: #000000; stroke-width: 0.5;"/><script type="text/plantuml"><![CDATA[MD5=[3baae85d984482530e3b77a0bf3b45b9]
+@startuml
+
+scale max 1920 width
+top to bottom direction
+
+skinparam nodesep 14
+skinparam ranksep 27
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Tahoma
+skinparam defaultFontSize 12
+skinparam roundCorner 6
+skinparam dpi 150
+skinparam arrowColor black
+skinparam arrowThickness 0.5
+skinparam packageTitleAlignment left
+
+skinparam usecase {
+  borderThickness 0.5
+}
+
+skinparam rectangle {
+  borderThickness 0.5
+}
+
+skinparam component {
+  borderThickness 1
+}
+
+
+package "Server & Router" {
+  (routes)
+  (<b>server</b>)
+}
+
+package "Controllers" {
+  rectangle "auth.controller" as _auth_controller
+  rectangle "user.controller" as _user_controller
+}
+
+package "Middlewares" {
+  (auth.jwt)
+  (logger)
+  rectangle "TypeORMLogger" as _TypeORMLogger
+}
+
+package "Models" {
+  rectangle "Auth" as _Auth
+  rectangle "models/User" as _models_User
+}
+
+package "Services" {
+  (auth.service)
+  (user.service)
+}
+
+package "Repositories" {
+  (user.repository)
+}
+
+package "Entities" {
+  rectangle "entities/User" as _entities_User
+  rectangle "EventLog" as _EventLog
+}
+
+
+_auth_controller --> _Auth
+_auth_controller --> (auth.service)
+_auth_controller --> (logger)
+(auth.jwt) --> _Auth
+(auth.jwt) ..> (logger)
+(auth.jwt) --> _models_User
+(auth.service) --> _Auth
+(auth.service) --> (auth.jwt)
+(auth.service) --> (user.repository)
+(routes) --> _auth_controller
+(routes) --> (auth.jwt)
+(routes) --> _user_controller
+(<b>server</b>) -[thickness=1]> _Auth
+(<b>server</b>) -[thickness=1]> (auth.jwt)
+(<b>server</b>) -[thickness=1]> (logger)
+(<b>server</b>) -[thickness=1]> _models_User
+(<b>server</b>) .[thickness=1]> (routes)
+(<b>server</b>) -[thickness=1]> _TypeORMLogger
+_TypeORMLogger ..> (logger)
+_user_controller --> (auth.jwt)
+_user_controller --> _models_User
+_user_controller --> (user.service)
+(user.repository) --> _entities_User
+(user.repository) --> _EventLog
+(user.repository) --> _models_User
+(user.service) --> _models_User
+(user.service) --> (user.repository)
+
+@enduml
+
+
+' View and edit on https://arkit.pro
+]]></script></g></svg>
