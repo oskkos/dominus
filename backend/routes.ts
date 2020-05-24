@@ -3,6 +3,8 @@
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { Controller, ValidationService, FieldErrors, ValidateError, TsoaRoute } from 'tsoa';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { ApartmentController } from './src/controllers/apartment.controller';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { AuthController } from './src/controllers/auth.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { UserController } from './src/controllers/user.controller';
@@ -12,6 +14,31 @@ import * as express from 'express';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
 const models: TsoaRoute.Models = {
+    "User": {
+        "dataType": "refObject",
+        "properties": {
+            "id": { "dataType": "integer", "required": true, "validators": { "isInt": { "errorMsg": "Integer" } } },
+            "username": { "dataType": "string", "required": true },
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "Apartment": {
+        "dataType": "refObject",
+        "properties": {
+            "id": { "dataType": "integer", "required": true, "validators": { "isInt": { "errorMsg": "Integer" } } },
+            "apartmentDescription": { "dataType": "string", "required": true },
+            "roomCount": { "dataType": "integer", "required": true, "validators": { "isInt": { "errorMsg": "Integer" } } },
+            "surfaceArea": { "dataType": "double", "required": true },
+            "streetAddress": { "dataType": "string", "required": true },
+            "postalCode": { "dataType": "string", "required": true },
+            "postDistrict": { "dataType": "string", "required": true },
+            "owner": { "ref": "User", "required": true },
+            "coOwners": { "dataType": "array", "array": { "ref": "User" }, "required": true },
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AuthToken": {
         "dataType": "refObject",
         "properties": {
@@ -27,15 +54,6 @@ const models: TsoaRoute.Models = {
         "properties": {
             "username": { "dataType": "string", "required": true },
             "password": { "dataType": "string", "required": true },
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "User": {
-        "dataType": "refObject",
-        "properties": {
-            "id": { "dataType": "integer", "required": true, "validators": { "isInt": { "errorMsg": "Integer" } } },
-            "username": { "dataType": "string", "required": true },
         },
         "additionalProperties": false,
     },
@@ -69,6 +87,28 @@ export function RegisterRoutes(app: express.Express) {
     //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
     //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
     // ###########################################################################################################
+    app.post('/apartment',
+        function(request: any, response: any, next: any) {
+            const args = {
+                data: { "in": "body", "name": "data", "required": true, "ref": "Apartment" },
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request);
+            } catch (err) {
+                return next(err);
+            }
+
+            const controller = new ApartmentController();
+
+
+            const promise = controller.addApartment.apply(controller, validatedArgs as any);
+            promiseHandler(controller, promise, response, next);
+        });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     app.post('/auth/signin',
         function(request: any, response: any, next: any) {
             const args = {

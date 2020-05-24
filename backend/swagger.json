@@ -6,6 +6,79 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
+			"User": {
+				"description": "Describes a user in a dominus",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"username": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"username"
+				],
+				"type": "object",
+				"additionalProperties": false,
+				"example": {
+					"id": 82,
+					"username": "oskkos"
+				}
+			},
+			"Apartment": {
+				"description": "Apartment details",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"apartmentDescription": {
+						"type": "string"
+					},
+					"roomCount": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"surfaceArea": {
+						"type": "number",
+						"format": "double"
+					},
+					"streetAddress": {
+						"type": "string"
+					},
+					"postalCode": {
+						"type": "string"
+					},
+					"postDistrict": {
+						"type": "string"
+					},
+					"owner": {
+						"$ref": "#/components/schemas/User"
+					},
+					"coOwners": {
+						"items": {
+							"$ref": "#/components/schemas/User"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"apartmentDescription",
+					"roomCount",
+					"surfaceArea",
+					"streetAddress",
+					"postalCode",
+					"postDistrict",
+					"owner",
+					"coOwners"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"AuthToken": {
 				"description": "AuthToken is used for granting access into dominus and identifying the user",
 				"properties": {
@@ -52,28 +125,6 @@
 				"example": {
 					"username": "oskkos",
 					"password": "s3cret"
-				}
-			},
-			"User": {
-				"description": "Describes a user in a dominus",
-				"properties": {
-					"id": {
-						"type": "integer",
-						"format": "int32"
-					},
-					"username": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"id",
-					"username"
-				],
-				"type": "object",
-				"additionalProperties": false,
-				"example": {
-					"id": 82,
-					"username": "oskkos"
 				}
 			},
 			"AddUserBody": {
@@ -141,6 +192,36 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
+		"/apartment": {
+			"post": {
+				"operationId": "AddApartment",
+				"responses": {
+					"204": {
+						"content": {
+							"application/json": {}
+						},
+						"description": "No content"
+					}
+				},
+				"description": "Add new apartment",
+				"tags": [
+					"Apartment"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"description": "Apartment: contains fields required for adding new apartment",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Apartment"
+							}
+						}
+					}
+				}
+			}
+		},
 		"/auth/signin": {
 			"post": {
 				"operationId": "Signin",
