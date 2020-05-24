@@ -1,5 +1,6 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne } from 'typeorm';
 import { EntityWithIdAndTimestamps } from './EntityWithIdAndTimestamps';
+import { User } from './User';
 
 @Entity()
 export class Apartment extends EntityWithIdAndTimestamps {
@@ -20,4 +21,11 @@ export class Apartment extends EntityWithIdAndTimestamps {
 
   @Column()
   postDistrict!: string;
+
+  @ManyToOne(() => User)
+  owner!: User;
+
+  @ManyToMany(() => User)
+  @JoinTable()
+  coOwners!: User[];
 }
