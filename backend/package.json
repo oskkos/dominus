@@ -5,9 +5,7 @@
   "main": "server.js",
   "scripts": {
     "dev": "concurrently \"nodemon\" \"nodemon -x tsoa spec-and-routes\"",
-    "tsc": "tsc",
-    "tsoa": "tsoa",
-    "watch": "tsc --watch",
+    "arkit": "arkit",
     "lint": "eslint **/*.ts --fix && speccy lint swagger.json -s server-trailing-slash -s info-contact -s openapi-tags",
     "build": "tsoa spec-and-routes && tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -48,6 +46,7 @@
     "@types/swagger-ui-express": "^4.1.2",
     "@typescript-eslint/eslint-plugin": "^2.27.0",
     "@typescript-eslint/parser": "^2.27.0",
+    "arkit": "^1.6.4",
     "concurrently": "^5.2.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
