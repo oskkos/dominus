@@ -19,6 +19,7 @@ import { decodeToken, getToken } from '../middlewares/auth.jwt';
 export class UserController extends Controller {
   /**
    * Entry point for getting self
+   * @param request Used to get token
    */
   @Security('apiKey')
   @Get('self')
@@ -29,6 +30,7 @@ export class UserController extends Controller {
 
   /**
    * Add new user
+   * @param data AddUserBody: contains fields required for adding new user
    */
   @Post()
   public addUser(@Body() data: AddUserBody): Promise<void> {
@@ -39,8 +41,8 @@ export class UserController extends Controller {
    * Entry point for changing password for current user
    * @param request Used to get token
    * @param userId Id of the current user, should match with the tokens user
-   * @param data Object containing oldPwd and newPwd string fields
    * @example userId 20
+   * @param data ChangePasswordBody: contains oldPwd and newPwd
    */
   @Security('apiKey')
   @Put('{userId}/changePassword')

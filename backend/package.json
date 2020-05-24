@@ -13,7 +13,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged && npm run arkit && git add module_dependencies.svg"
+      "pre-commit": "pretty-quick --pattern \"src/**/*.ts\" --staged && npm run arkit && git add module_dependencies.svg"
     }
   },
   "author": "Oskari Kosonen <o.kosonen@gmail.com>",
