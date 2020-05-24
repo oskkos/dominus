@@ -1,0 +1,76 @@
+{
+  "components": [
+    {
+      "type": "Dependency",
+      "patterns": ["node_modules/*"]
+    },
+    {
+      "type": "Controllers",
+      "patterns": ["src/controllers/**.ts"]
+    },
+    {
+      "type": "Middlewares",
+      "patterns": ["src/middlewares/**.ts"]
+    },
+    {
+      "type": "Models",
+      "patterns": ["src/models/**.ts"]
+    },
+    {
+      "type": "Services",
+      "patterns": ["src/services/**.ts"]
+    },
+    {
+      "type": "Repositories",
+      "patterns": ["src/repositories/**.ts"]
+    },
+    {
+      "type": "Entities",
+      "patterns": ["src/entities/**.ts"]
+    },
+    {
+      "type": "Component",
+      "patterns": ["**/*.ts"]
+    }
+  ],
+  "excludePatterns": ["build"],
+  "output": [
+    {
+      "path": ["arkit.svg"],
+      "groups": [
+        {
+          "first": true,
+          "components": ["Component"]
+        },
+        {
+          "type": "Controllers",
+          "components": ["Controllers"]
+        },
+        {
+          "type": "Middlewares",
+          "components": ["Middlewares"]
+        },
+        {
+          "type": "Models",
+          "components": ["Models"]
+        },
+        {
+          "type": "Services",
+          "components": ["Services"]
+        },
+        {
+          "type": "Repositories",
+          "components": ["Repositories"]
+        },
+        {
+          "type": "Entities",
+          "components": ["Entities"]
+        },
+        {
+          "type": "Dependencies",
+          "components": ["Dependency"]
+        }
+      ]
+    }
+  ]
+}

@@ -1,19 +1,45 @@
 require('dotenv').config();
 
 /* eslint-disable import/first */
-import { createConnection, getConnectionOptions } from 'typeorm';
 import 'reflect-metadata';
+import { createConnection, getConnectionOptions } from 'typeorm';
 import swaggerUi from 'swagger-ui-express';
 import express, { Response, Request } from 'express';
+import log4js from 'log4js';
 import { RegisterRoutes } from '../routes';
-import { TypeORMLogger } from './entities/TypeORMLogger';
-import { configureLogger, getLogger } from './middlewares/logger';
+import { TypeORMLogger } from './middlewares/TypeORMLogger';
+import { getLogger } from './middlewares/logger';
 import { decodeToken, getToken } from './middlewares/auth.jwt';
 
 import bodyParser = require('body-parser');
 import cors = require('cors');
+import { AuthToken } from './models/Auth';
+import { User } from './models/User';
+
+function configureLogger(token: AuthToken | null): void {
+  log4js.configure({
+    appenders: {
+      out: {
+        type: 'stdout',
+        layout: {
+          type: 'pattern',
+          pattern: '%[%d{ISO8601} [%p] [%c] [%x{user}] %m%]',
+          tokens: {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+            // @ts-ignore
+            user: (): User => (token ? token.username : '_system'),
+          },
+        },
+      },
+    },
+    categories: {
+      default: { appenders: ['out'], level: 'trace', enableCallStack: true },
+    },
+  });
+}
 
 configureLogger(null);
+
 getConnectionOptions().then((connectionOptions) => {
   createConnection({
     ...connectionOptions,

@@ -1,5 +1,5 @@
 import { Logger, QueryRunner } from 'typeorm';
-import { getLogger } from '../middlewares/logger';
+import { getLogger } from './logger';
 
 const logger = getLogger('TypeORM');
 export class TypeORMLogger implements Logger {
