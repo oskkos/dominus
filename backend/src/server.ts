@@ -6,6 +6,7 @@ import { createConnection, getConnectionOptions } from 'typeorm';
 import swaggerUi from 'swagger-ui-express';
 import express, { Response, Request } from 'express';
 import log4js from 'log4js';
+import { join } from 'path';
 import { RegisterRoutes } from '../routes';
 import { TypeORMLogger } from './middlewares/TypeORMLogger';
 import { getLogger } from './middlewares/logger';
@@ -43,6 +44,7 @@ configureLogger(null);
 getConnectionOptions().then((connectionOptions) => {
   createConnection({
     ...connectionOptions,
+    entities: [join(__dirname, 'entities', '*.{ts,js}')],
     logger: new TypeORMLogger(),
   }).then(() => {
     const logger = getLogger();
