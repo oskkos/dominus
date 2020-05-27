@@ -4,6 +4,20 @@ import { User } from './User';
 
 @Entity()
 export class Apartment extends EntityWithIdAndTimestamps {
+  constructor(data: {
+    apartmentDescription: string;
+    roomCount: number;
+    surfaceArea: number;
+    streetAddress: string;
+    postalCode: string;
+    postDistrict: string;
+    owner: User;
+    coOwners: User[];
+  }) {
+    super();
+    Object.assign(this, data);
+  }
+
   @Column()
   apartmentDescription!: string;
 

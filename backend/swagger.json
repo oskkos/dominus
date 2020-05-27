@@ -77,7 +77,26 @@
 					"coOwners"
 				],
 				"type": "object",
-				"additionalProperties": false
+				"additionalProperties": false,
+				"example": {
+					"id": 3,
+					"apartmentDescription": "2h+k+ph+parv.",
+					"roomCount": 2,
+					"surfaceArea": 54.5,
+					"streetAddress": "Mallikatu 27 A 8",
+					"postalCode": "33100",
+					"postDistrict": "Tampere",
+					"owner": {
+						"id": 82,
+						"username": "oskkos"
+					},
+					"coOwners": [
+						{
+							"id": 75,
+							"username": "arokman"
+						}
+					]
+				}
 			},
 			"AuthToken": {
 				"description": "AuthToken is used for granting access into dominus and identifying the user",
@@ -196,11 +215,15 @@
 			"post": {
 				"operationId": "AddApartment",
 				"responses": {
-					"204": {
+					"200": {
 						"content": {
-							"application/json": {}
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Apartment"
+								}
+							}
 						},
-						"description": "No content"
+						"description": "Ok"
 					}
 				},
 				"description": "Add new apartment",

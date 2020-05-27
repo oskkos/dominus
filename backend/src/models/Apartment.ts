@@ -3,14 +3,23 @@ import { User } from './User';
 /**
  * Apartment details
  *
- *
+ * @tsoaModel
  * @example {
  *   "id": 3,
- *   "apartmentDescription": "2h+k+ph+parv."
+ *   "apartmentDescription": "2h+k+ph+parv.",
  *   "roomCount": 2,
  *   "surfaceArea": 54.5,
+ *   "streetAddress": "Mallikatu 27 A 8",
  *   "postalCode": "33100",
- *   "postDistrict": "Tampere"
+ *   "postDistrict": "Tampere",
+ *   "owner": {
+ *      "id": 82,
+ *      "username": "oskkos"
+ *   },
+ *   "coOwners": [{
+ *      "id": 75,
+ *      "username": "arokman"
+ *   }]
  * }
  */
 export interface Apartment {
