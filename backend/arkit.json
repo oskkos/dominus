@@ -29,6 +29,10 @@
       "patterns": ["src/entities/**.ts"]
     },
     {
+      "type": "Errors",
+      "patterns": ["src/errors/**.ts"]
+    },
+    {
       "type": "Component",
       "patterns": ["**/*.ts"]
     }
@@ -66,6 +70,10 @@
         {
           "type": "Entities",
           "components": ["Entities"]
+        },
+        {
+          "type": "Errors",
+          "components": ["Errors"]
         }
       ]
     }
