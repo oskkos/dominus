@@ -1,5 +1,3 @@
-import { User } from './User';
-
 /**
  * Apartment details
  *
@@ -11,15 +9,7 @@ import { User } from './User';
  *   "surfaceArea": 54.5,
  *   "streetAddress": "Mallikatu 27 A 8",
  *   "postalCode": "33100",
- *   "postDistrict": "Tampere",
- *   "owner": {
- *      "id": 82,
- *      "username": "oskkos"
- *   },
- *   "coOwners": [{
- *      "id": 75,
- *      "username": "arokman"
- *   }]
+ *   "postDistrict": "Tampere"
  * }
  */
 export interface Apartment {
@@ -36,6 +26,4 @@ export interface Apartment {
   streetAddress: string;
   postalCode: string;
   postDistrict: string;
-  owner: User;
-  coOwners: User[];
 }

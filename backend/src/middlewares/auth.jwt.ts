@@ -10,8 +10,10 @@ export const getToken = (request: Request): string =>
   request.body.token ||
   request.query.token ||
   request.headers['x-access-token'];
+
 export const decodeToken = (token: string): AuthToken =>
   decode(token) as AuthToken;
+
 export async function expressAuthentication(
   request: Request,
   securityName: string,
@@ -53,4 +55,9 @@ export function signToken(user: User): string {
     username: user.username,
   };
   return sign(payload, secret, { expiresIn: 86400 /* 24 hours */ });
+}
+
+export function getUserId(request: Request): number {
+  const token = decodeToken(getToken(request));
+  return token.id;
 }

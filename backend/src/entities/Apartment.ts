@@ -4,42 +4,50 @@ import { User } from './User';
 
 @Entity()
 export class Apartment extends EntityWithIdAndTimestamps {
-  constructor(data: {
-    apartmentDescription: string;
-    roomCount: number;
-    surfaceArea: number;
-    streetAddress: string;
-    postalCode: string;
-    postDistrict: string;
-    owner: User;
-    coOwners: User[];
-  }) {
+  constructor(
+    apartmentDescription: string,
+    roomCount: number,
+    surfaceArea: number,
+    streetAddress: string,
+    postalCode: string,
+    postDistrict: string,
+    owner: User,
+    coOwners: User[],
+  ) {
     super();
-    Object.assign(this, data);
+
+    this.apartmentDescription = apartmentDescription;
+    this.roomCount = roomCount;
+    this.surfaceArea = surfaceArea;
+    this.streetAddress = streetAddress;
+    this.postalCode = postalCode;
+    this.postDistrict = postDistrict;
+    this.owner = owner;
+    this.coOwners = coOwners;
   }
 
   @Column()
-  apartmentDescription!: string;
+  apartmentDescription: string;
 
   @Column('smallint')
-  roomCount!: number;
+  roomCount: number;
 
   @Column('decimal')
-  surfaceArea!: number;
+  surfaceArea: number;
 
   @Column()
-  streetAddress!: string;
+  streetAddress: string;
 
   @Column()
-  postalCode!: string;
+  postalCode: string;
 
   @Column()
-  postDistrict!: string;
+  postDistrict: string;
 
   @ManyToOne(() => User)
-  owner!: User;
+  owner: User;
 
   @ManyToMany(() => User)
   @JoinTable()
-  coOwners!: User[];
+  coOwners: User[];
 }

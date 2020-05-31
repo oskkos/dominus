@@ -14,15 +14,6 @@ import * as express from 'express';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
 const models: TsoaRoute.Models = {
-    "User": {
-        "dataType": "refObject",
-        "properties": {
-            "id": { "dataType": "integer", "required": true, "validators": { "isInt": { "errorMsg": "Integer" } } },
-            "username": { "dataType": "string", "required": true },
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "Apartment": {
         "dataType": "refObject",
         "properties": {
@@ -33,8 +24,6 @@ const models: TsoaRoute.Models = {
             "streetAddress": { "dataType": "string", "required": true },
             "postalCode": { "dataType": "string", "required": true },
             "postDistrict": { "dataType": "string", "required": true },
-            "owner": { "ref": "User", "required": true },
-            "coOwners": { "dataType": "array", "array": { "ref": "User" }, "required": true },
         },
         "additionalProperties": false,
     },
@@ -54,6 +43,15 @@ const models: TsoaRoute.Models = {
         "properties": {
             "username": { "dataType": "string", "required": true },
             "password": { "dataType": "string", "required": true },
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "User": {
+        "dataType": "refObject",
+        "properties": {
+            "id": { "dataType": "integer", "required": true, "validators": { "isInt": { "errorMsg": "Integer" } } },
+            "username": { "dataType": "string", "required": true },
         },
         "additionalProperties": false,
     },
@@ -88,8 +86,10 @@ export function RegisterRoutes(app: express.Express) {
     //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
     // ###########################################################################################################
     app.post('/apartment',
+        authenticateMiddleware([{ "apiKey": [] }]),
         function(request: any, response: any, next: any) {
             const args = {
+                request: { "in": "request", "name": "request", "required": true, "dataType": "object" },
                 data: { "in": "body", "name": "data", "required": true, "ref": "Apartment" },
             };
 

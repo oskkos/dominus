@@ -6,28 +6,6 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
-			"User": {
-				"description": "Describes a user in a dominus",
-				"properties": {
-					"id": {
-						"type": "integer",
-						"format": "int32"
-					},
-					"username": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"id",
-					"username"
-				],
-				"type": "object",
-				"additionalProperties": false,
-				"example": {
-					"id": 82,
-					"username": "oskkos"
-				}
-			},
 			"Apartment": {
 				"description": "Apartment details",
 				"properties": {
@@ -54,15 +32,6 @@
 					},
 					"postDistrict": {
 						"type": "string"
-					},
-					"owner": {
-						"$ref": "#/components/schemas/User"
-					},
-					"coOwners": {
-						"items": {
-							"$ref": "#/components/schemas/User"
-						},
-						"type": "array"
 					}
 				},
 				"required": [
@@ -72,9 +41,7 @@
 					"surfaceArea",
 					"streetAddress",
 					"postalCode",
-					"postDistrict",
-					"owner",
-					"coOwners"
+					"postDistrict"
 				],
 				"type": "object",
 				"additionalProperties": false,
@@ -85,17 +52,7 @@
 					"surfaceArea": 54.5,
 					"streetAddress": "Mallikatu 27 A 8",
 					"postalCode": "33100",
-					"postDistrict": "Tampere",
-					"owner": {
-						"id": 82,
-						"username": "oskkos"
-					},
-					"coOwners": [
-						{
-							"id": 75,
-							"username": "arokman"
-						}
-					]
+					"postDistrict": "Tampere"
 				}
 			},
 			"AuthToken": {
@@ -144,6 +101,28 @@
 				"example": {
 					"username": "oskkos",
 					"password": "s3cret"
+				}
+			},
+			"User": {
+				"description": "Describes a user in a dominus",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"username": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"username"
+				],
+				"type": "object",
+				"additionalProperties": false,
+				"example": {
+					"id": 82,
+					"username": "oskkos"
 				}
 			},
 			"AddUserBody": {
@@ -230,7 +209,11 @@
 				"tags": [
 					"Apartment"
 				],
-				"security": [],
+				"security": [
+					{
+						"apiKey": []
+					}
+				],
 				"parameters": [],
 				"requestBody": {
 					"description": "Apartment: contains fields required for adding new apartment",

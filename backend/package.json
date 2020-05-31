@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "tsc": "tsc",
     "dev": "concurrently \"nodemon\" \"nodemon -x tsoa spec-and-routes\"",
     "arkit": "arkit -c arkit.json",
     "lint": "eslint **/*.ts --fix && speccy lint swagger.json -s server-trailing-slash -s info-contact -s openapi-tags",

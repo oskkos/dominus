@@ -36,4 +36,11 @@ export class EventLog extends EntityWithIdAndTimestamps {
   ): EventLog {
     return new EventLog('User', userId, 'UserPasswordChanged', data);
   }
+
+  static ApartmentAdded(
+    userId: number,
+    data: { apartment: {}; ownerId: number },
+  ): EventLog {
+    return new EventLog('Apartment', userId, 'ApartmentAdded', data);
+  }
 }
