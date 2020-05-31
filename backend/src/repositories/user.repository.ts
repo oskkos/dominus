@@ -2,6 +2,7 @@ import { getConnection } from 'typeorm';
 import { UserWithCryptedPassword, User } from '../models/User';
 import { User as EntityUser } from '../entities/User';
 import { EventLog } from '../entities/EventLog';
+import { NotFoundError } from '../errors/NotFoundError';
 
 export async function openById(id: number): Promise<User> {
   const userRepository = getConnection().getRepository(EntityUser);
@@ -9,15 +10,15 @@ export async function openById(id: number): Promise<User> {
   if (user) {
     return { id: user.id, username: user.username };
   }
-  throw new Error(`User open failed with id: ${id}`);
+  throw new NotFoundError('User', { id });
 }
 export async function getByUserName(
   username: string,
-): Promise<UserWithCryptedPassword | null> {
+): Promise<UserWithCryptedPassword> {
   const userRepository = getConnection().getRepository(EntityUser);
   const user = await userRepository.findOne({ username });
   if (!user) {
-    return null;
+    throw new NotFoundError('User', { username });
   }
   return {
     id: user.id,
@@ -49,7 +50,7 @@ export async function changePassword(
   const userRepository = getConnection().getRepository(EntityUser);
   const user = await userRepository.findOne({ id });
   if (!user) {
-    throw new Error(`User open failed with id: ${id}`);
+    throw new NotFoundError('User', { id });
   }
   return getConnection().transaction(async (transactionalEntityManager) => {
     user.password = password;
