@@ -9,6 +9,7 @@ import express, { Response, Request, NextFunction } from 'express';
 import log4js from 'log4js';
 import { join } from 'path';
 import { RegisterRoutes } from '../routes';
+import { NotFoundError } from './errors/NotFoundError';
 import { TypeORMLogger } from './middlewares/TypeORMLogger';
 import { getLogger } from './middlewares/logger';
 import { decodeToken, getToken } from './middlewares/auth.jwt';
@@ -81,25 +82,28 @@ getConnectionOptions().then((connectionOptions) => {
     app.use(
       (
         err: unknown,
-        req: Request,
+        _req: Request,
         res: Response,
         next: NextFunction,
       ): Response | void => {
+        const handleError = (
+          code: number,
+          message: string,
+          error: Error,
+        ): Response => {
+          logger.error(`${code} ${message}`, error);
+          return res.status(code).json({ message, details: error.toString() });
+        };
+
         if (err instanceof ValidateError) {
-          logger.warn(`Caught Validation Error for ${req.path}:`, err.fields);
-          return res.status(422).json({
-            message: 'Validation Failed',
-            details: err?.fields,
-          });
+          return handleError(422, 'Validation failed', err);
+        }
+        if (err instanceof NotFoundError) {
+          return handleError(404, 'Not found', err);
         }
         if (err instanceof Error) {
-          logger.error('Internal Sever Error', err);
-          return res.status(500).json({
-            message: 'Internal Server Error',
-            details: err.toString(),
-          });
+          return handleError(500, 'Internal Server Error', err);
         }
-
         next();
       },
     );

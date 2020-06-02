@@ -2,7 +2,6 @@ import {
   Body,
   Controller,
   Get,
-  Path,
   Post,
   Put,
   Request,
@@ -14,8 +13,8 @@ import { Request as ExRequest } from 'express';
 import * as UserService from '../services/user.service';
 import { User } from '../models/User';
 import { getUserId } from '../middlewares/auth.jwt';
-@Route('user')
-@Tags('User')
+@Route('users')
+@Tags('Users')
 export class UserController extends Controller {
   /**
    * Entry point for getting self
@@ -39,21 +38,19 @@ export class UserController extends Controller {
   /**
    * Entry point for changing password for current user
    * @param request Used to get user id
-   * @param userId Id of the current user, should match with the tokens user
-   * @example userId 20
    * @param data ChangePasswordBody: contains oldPwd and newPwd
    */
   @Security('apiKey')
-  @Put('{userId}/changePassword')
+  @Put('changePassword')
   public async changePassword(
     @Request() request: ExRequest,
-    @Path() userId: number,
     @Body() data: ChangePasswordBody,
   ): Promise<void> {
-    if (getUserId(request) !== userId) {
-      throw new Error("Can't change password for other user");
-    }
-    return UserService.changePassword(userId, data.oldPwd, data.newPwd);
+    return UserService.changePassword(
+      getUserId(request),
+      data.oldPwd,
+      data.newPwd,
+    );
   }
 }
 

@@ -7,3 +7,6 @@ export async function addApartment(
 ): Promise<Apartment> {
   return ApartmentRepo.addApartment(apartment, ownerId);
 }
+export async function getApartments(ownerId: number): Promise<Apartment[]> {
+  return ApartmentRepo.getApartments(ownerId);
+}

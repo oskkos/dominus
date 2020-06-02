@@ -1,8 +1,16 @@
-import { Column, Entity, JoinTable, ManyToMany, ManyToOne } from 'typeorm';
+import {
+  Column,
+  Entity,
+  Index,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+} from 'typeorm';
 import { EntityWithIdAndTimestamps } from './EntityWithIdAndTimestamps';
 import { User } from './User';
 
 @Entity()
+@Index(['streetAddress', 'postalCode'], { unique: true })
 export class Apartment extends EntityWithIdAndTimestamps {
   constructor(
     apartmentDescription: string,

@@ -17,8 +17,7 @@ const models: TsoaRoute.Models = {
     "Apartment": {
         "dataType": "refObject",
         "properties": {
-            "id": { "dataType": "integer", "required": true, "validators": { "isInt": { "errorMsg": "Integer" } } },
-            "apartmentDescription": { "dataType": "string", "required": true },
+            "apartmentDescription": { "dataType": "string", "required": true, "validators": { "isInt": { "errorMsg": "Integer" } } },
             "roomCount": { "dataType": "integer", "required": true, "validators": { "isInt": { "errorMsg": "Integer" } } },
             "surfaceArea": { "dataType": "double", "required": true },
             "streetAddress": { "dataType": "string", "required": true },
@@ -85,7 +84,7 @@ export function RegisterRoutes(app: express.Express) {
     //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
     //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
     // ###########################################################################################################
-    app.post('/apartment',
+    app.post('/apartments',
         authenticateMiddleware([{ "apiKey": [] }]),
         function(request: any, response: any, next: any) {
             const args = {
@@ -106,6 +105,29 @@ export function RegisterRoutes(app: express.Express) {
 
 
             const promise = controller.addApartment.apply(controller, validatedArgs as any);
+            promiseHandler(controller, promise, response, next);
+        });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.get('/apartments',
+        authenticateMiddleware([{ "apiKey": [] }]),
+        function(request: any, response: any, next: any) {
+            const args = {
+                request: { "in": "request", "name": "request", "required": true, "dataType": "object" },
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request);
+            } catch (err) {
+                return next(err);
+            }
+
+            const controller = new ApartmentController();
+
+
+            const promise = controller.getApartments.apply(controller, validatedArgs as any);
             promiseHandler(controller, promise, response, next);
         });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -131,7 +153,7 @@ export function RegisterRoutes(app: express.Express) {
             promiseHandler(controller, promise, response, next);
         });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.get('/user/self',
+    app.get('/users/self',
         authenticateMiddleware([{ "apiKey": [] }]),
         function(request: any, response: any, next: any) {
             const args = {
@@ -154,7 +176,7 @@ export function RegisterRoutes(app: express.Express) {
             promiseHandler(controller, promise, response, next);
         });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.post('/user',
+    app.post('/users',
         function(request: any, response: any, next: any) {
             const args = {
                 data: { "in": "body", "name": "data", "required": true, "ref": "AddUserBody" },
@@ -176,12 +198,11 @@ export function RegisterRoutes(app: express.Express) {
             promiseHandler(controller, promise, response, next);
         });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.put('/user/:userId/changePassword',
+    app.put('/users/changePassword',
         authenticateMiddleware([{ "apiKey": [] }]),
         function(request: any, response: any, next: any) {
             const args = {
                 request: { "in": "request", "name": "request", "required": true, "dataType": "object" },
-                userId: { "in": "path", "name": "userId", "required": true, "dataType": "double" },
                 data: { "in": "body", "name": "data", "required": true, "ref": "ChangePasswordBody" },
             };
 

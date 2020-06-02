@@ -3,7 +3,6 @@
  *
  * @tsoaModel
  * @example {
- *   "id": 3,
  *   "apartmentDescription": "2h+k+ph+parv.",
  *   "roomCount": 2,
  *   "surfaceArea": 54.5,
@@ -16,7 +15,6 @@ export interface Apartment {
   /**
    * @isInt Integer
    */
-  id: number;
   apartmentDescription: string;
   /**
    * @isInt Integer

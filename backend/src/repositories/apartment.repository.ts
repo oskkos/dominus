@@ -8,14 +8,8 @@ export async function addApartment(
   apartment: Apartment,
   ownerId: number,
 ): Promise<Apartment> {
-  if (apartment.id) {
-    throw new Error('Apartment already added!');
-  }
   const userRepository = getConnection().getRepository(EntityUser);
-  const owner = await userRepository.findOne({ id: ownerId });
-  if (!owner) {
-    throw new Error('Failed to open owner object');
-  }
+  const owner = await userRepository.findOneOrFail({ id: ownerId });
 
   return getConnection().transaction(async (transactionalEntityManager) => {
     const entityAptmt = new EntityApartment(
@@ -36,4 +30,22 @@ export async function addApartment(
     // TODO: Convert to Model object
     return apt;
   });
+}
+
+export async function getApartments(ownerId: number): Promise<Apartment[]> {
+  const apartments = await getConnection()
+    .createQueryBuilder()
+    .select('apartment')
+    .from(EntityApartment, 'apartment')
+    .leftJoinAndSelect(
+      'apartment_co_owners_user',
+      'coOwner',
+      'coOwner.apartmentId = apartment.id',
+    )
+    .where('"ownerId" = :ownerId', { ownerId })
+    .orWhere('"userId" = :coOwnerid', { coOwnerid: ownerId })
+    .getMany();
+
+  // TODO: Convert to Model objects
+  return apartments;
 }

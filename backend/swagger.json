@@ -9,10 +9,6 @@
 			"Apartment": {
 				"description": "Apartment details",
 				"properties": {
-					"id": {
-						"type": "integer",
-						"format": "int32"
-					},
 					"apartmentDescription": {
 						"type": "string"
 					},
@@ -35,7 +31,6 @@
 					}
 				},
 				"required": [
-					"id",
 					"apartmentDescription",
 					"roomCount",
 					"surfaceArea",
@@ -46,7 +41,6 @@
 				"type": "object",
 				"additionalProperties": false,
 				"example": {
-					"id": 3,
 					"apartmentDescription": "2h+k+ph+parv.",
 					"roomCount": 2,
 					"surfaceArea": 54.5,
@@ -190,7 +184,7 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/apartment": {
+		"/apartments": {
 			"post": {
 				"operationId": "AddApartment",
 				"responses": {
@@ -207,7 +201,7 @@
 				},
 				"description": "Add new apartment",
 				"tags": [
-					"Apartment"
+					"Apartments"
 				],
 				"security": [
 					{
@@ -226,6 +220,34 @@
 						}
 					}
 				}
+			},
+			"get": {
+				"operationId": "GetApartments",
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Apartment"
+									},
+									"type": "array"
+								}
+							}
+						},
+						"description": "Ok"
+					}
+				},
+				"description": "Get all apartments of logged in user",
+				"tags": [
+					"Apartments"
+				],
+				"security": [
+					{
+						"apiKey": []
+					}
+				],
+				"parameters": []
 			}
 		},
 		"/auth/signin": {
@@ -262,7 +284,7 @@
 				}
 			}
 		},
-		"/user/self": {
+		"/users/self": {
 			"get": {
 				"operationId": "GetSelf",
 				"responses": {
@@ -279,7 +301,7 @@
 				},
 				"description": "Entry point for getting self",
 				"tags": [
-					"User"
+					"Users"
 				],
 				"security": [
 					{
@@ -289,7 +311,7 @@
 				"parameters": []
 			}
 		},
-		"/user": {
+		"/users": {
 			"post": {
 				"operationId": "AddUser",
 				"responses": {
@@ -302,7 +324,7 @@
 				},
 				"description": "Add new user",
 				"tags": [
-					"User"
+					"Users"
 				],
 				"security": [],
 				"parameters": [],
@@ -319,7 +341,7 @@
 				}
 			}
 		},
-		"/user/{userId}/changePassword": {
+		"/users/changePassword": {
 			"put": {
 				"operationId": "ChangePassword",
 				"responses": {
@@ -332,26 +354,14 @@
 				},
 				"description": "Entry point for changing password for current user",
 				"tags": [
-					"User"
+					"Users"
 				],
 				"security": [
 					{
 						"apiKey": []
 					}
 				],
-				"parameters": [
-					{
-						"description": "Id of the current user, should match with the tokens user",
-						"example": 20,
-						"in": "path",
-						"name": "userId",
-						"required": true,
-						"schema": {
-							"format": "double",
-							"type": "number"
-						}
-					}
-				],
+				"parameters": [],
 				"requestBody": {
 					"description": "ChangePasswordBody: contains oldPwd and newPwd",
 					"required": true,

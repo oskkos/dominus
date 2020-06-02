@@ -1,10 +1,19 @@
-import { Body, Controller, Post, Request, Route, Security, Tags } from 'tsoa';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Request,
+  Route,
+  Security,
+  Tags,
+} from 'tsoa';
 import { Request as ExRequest } from 'express';
 import { Apartment } from '../models/Apartment';
 import * as ApartmentService from '../services/apartment.service';
 import { getUserId } from '../middlewares/auth.jwt';
-@Route('apartment')
-@Tags('Apartment')
+@Route('apartments')
+@Tags('Apartments')
 @Security('apiKey')
 export class ApartmentController extends Controller {
   /**
@@ -18,5 +27,14 @@ export class ApartmentController extends Controller {
     @Body() data: Apartment,
   ): Promise<Apartment> {
     return ApartmentService.addApartment(data, getUserId(request));
+  }
+
+  /**
+   * Get all apartments of logged in user
+   * @param request
+   */
+  @Get()
+  public getApartments(@Request() request: ExRequest): Promise<Apartment[]> {
+    return ApartmentService.getApartments(getUserId(request));
   }
 }
