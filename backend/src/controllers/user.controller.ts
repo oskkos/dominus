@@ -2,7 +2,6 @@ import {
   Body,
   Controller,
   Get,
-  Post,
   Put,
   Request,
   Route,
@@ -15,24 +14,15 @@ import { User } from '../models/User';
 import { getUserId } from '../middlewares/auth.jwt';
 @Route('users')
 @Tags('Users')
+@Security('apiKey')
 export class UserController extends Controller {
   /**
    * Entry point for getting self
    * @param request Used to get token
    */
-  @Security('apiKey')
   @Get('self')
   public getSelf(@Request() request: ExRequest): Promise<User> {
     return UserService.openUser(getUserId(request));
-  }
-
-  /**
-   * Add new user
-   * @param data AddUserBody: contains fields required for adding new user
-   */
-  @Post()
-  public addUser(@Body() data: AddUserBody): Promise<void> {
-    return UserService.addUser(data.username, data.password, data.name);
   }
 
   /**
@@ -40,7 +30,6 @@ export class UserController extends Controller {
    * @param request Used to get user id
    * @param data ChangePasswordBody: contains oldPwd and newPwd
    */
-  @Security('apiKey')
   @Put('changePassword')
   public async changePassword(
     @Request() request: ExRequest,
@@ -52,20 +41,6 @@ export class UserController extends Controller {
       data.newPwd,
     );
   }
-}
-
-/**
- * Payload for adding a new user
- * @example {
- *   "username": "oskkos",
- *   "password": "s3cret",
- *   "name": "Oskari Kosonen"
- * }
- */
-interface AddUserBody {
-  username: string;
-  password: string;
-  name: string;
 }
 
 /**

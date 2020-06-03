@@ -10,3 +10,14 @@ export async function addApartment(
 export async function getApartments(ownerId: number): Promise<Apartment[]> {
   return ApartmentRepo.getApartments(ownerId);
 }
+export async function addCoOwner(
+  apartmentId: number,
+  ownerId: number,
+  coOwnerId: number,
+): Promise<void> {
+  return ApartmentRepo.addCoOwner(apartmentId, ownerId, coOwnerId).catch(
+    (e) => {
+      throw e;
+    },
+  );
+}

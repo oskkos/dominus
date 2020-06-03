@@ -46,21 +46,21 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "User": {
-        "dataType": "refObject",
-        "properties": {
-            "id": { "dataType": "integer", "required": true, "validators": { "isInt": { "errorMsg": "Integer" } } },
-            "username": { "dataType": "string", "required": true },
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AddUserBody": {
         "dataType": "refObject",
         "properties": {
             "username": { "dataType": "string", "required": true },
             "password": { "dataType": "string", "required": true },
             "name": { "dataType": "string", "required": true },
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "User": {
+        "dataType": "refObject",
+        "properties": {
+            "id": { "dataType": "integer", "required": true, "validators": { "isInt": { "errorMsg": "Integer" } } },
+            "username": { "dataType": "string", "required": true },
         },
         "additionalProperties": false,
     },
@@ -105,6 +105,31 @@ export function RegisterRoutes(app: express.Express) {
 
 
             const promise = controller.addApartment.apply(controller, validatedArgs as any);
+            promiseHandler(controller, promise, response, next);
+        });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.put('/apartments/:apartmentId/addCoOwner/:coOwnerId',
+        authenticateMiddleware([{ "apiKey": [] }]),
+        function(request: any, response: any, next: any) {
+            const args = {
+                request: { "in": "request", "name": "request", "required": true, "dataType": "object" },
+                apartmentId: { "in": "path", "name": "apartmentId", "required": true, "dataType": "integer", "validators": { "isInt": { "errorMsg": "Must give integer value" } } },
+                coOwnerId: { "in": "path", "name": "coOwnerId", "required": true, "dataType": "integer", "validators": { "isInt": { "errorMsg": "Must give integer value" } } },
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request);
+            } catch (err) {
+                return next(err);
+            }
+
+            const controller = new ApartmentController();
+
+
+            const promise = controller.addCoOwner.apply(controller, validatedArgs as any);
             promiseHandler(controller, promise, response, next);
         });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -153,6 +178,28 @@ export function RegisterRoutes(app: express.Express) {
             promiseHandler(controller, promise, response, next);
         });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.post('/auth/addUser',
+        function(request: any, response: any, next: any) {
+            const args = {
+                data: { "in": "body", "name": "data", "required": true, "ref": "AddUserBody" },
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request);
+            } catch (err) {
+                return next(err);
+            }
+
+            const controller = new AuthController();
+
+
+            const promise = controller.addUser.apply(controller, validatedArgs as any);
+            promiseHandler(controller, promise, response, next);
+        });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     app.get('/users/self',
         authenticateMiddleware([{ "apiKey": [] }]),
         function(request: any, response: any, next: any) {
@@ -173,28 +220,6 @@ export function RegisterRoutes(app: express.Express) {
 
 
             const promise = controller.getSelf.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, next);
-        });
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.post('/users',
-        function(request: any, response: any, next: any) {
-            const args = {
-                data: { "in": "body", "name": "data", "required": true, "ref": "AddUserBody" },
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request);
-            } catch (err) {
-                return next(err);
-            }
-
-            const controller = new UserController();
-
-
-            const promise = controller.addUser.apply(controller, validatedArgs as any);
             promiseHandler(controller, promise, response, next);
         });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

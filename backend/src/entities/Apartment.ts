@@ -52,10 +52,16 @@ export class Apartment extends EntityWithIdAndTimestamps {
   @Column()
   postDistrict: string;
 
+  @Column({ nullable: true })
+  ownerId!: number;
+
   @ManyToOne(() => User)
   owner: User;
 
-  @ManyToMany(() => User)
+  @ManyToMany(() => User, {
+    cascade: true,
+    eager: true,
+  })
   @JoinTable()
   coOwners: User[];
 }

@@ -2,7 +2,9 @@ import {
   Body,
   Controller,
   Get,
+  Path,
   Post,
+  Put,
   Request,
   Route,
   Security,
@@ -27,6 +29,31 @@ export class ApartmentController extends Controller {
     @Body() data: Apartment,
   ): Promise<Apartment> {
     return ApartmentService.addApartment(data, getUserId(request));
+  }
+
+  /**
+   * Add new apartment
+   * @param request Used to get user id
+   * @param apartmentId Apartment that should get new co-owner
+   * @example apartmentId 1
+   * @isInt apartmentId Must give integer value
+   * @param coOwnerId New co-owner
+   * @example coOwnerId 2
+   * @isInt coOwnerId Must give integer value
+   */
+  @Put('{apartmentId}/addCoOwner/{coOwnerId}')
+  public addCoOwner(
+    @Request() request: ExRequest,
+    @Path() apartmentId: number,
+    @Path() coOwnerId: number,
+  ): Promise<void> {
+    return ApartmentService.addCoOwner(
+      apartmentId,
+      getUserId(request),
+      coOwnerId,
+    ).catch((e) => {
+      throw e;
+    });
   }
 
   /**

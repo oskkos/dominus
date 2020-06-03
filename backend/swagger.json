@@ -97,28 +97,6 @@
 					"password": "s3cret"
 				}
 			},
-			"User": {
-				"description": "Describes a user in a dominus",
-				"properties": {
-					"id": {
-						"type": "integer",
-						"format": "int32"
-					},
-					"username": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"id",
-					"username"
-				],
-				"type": "object",
-				"additionalProperties": false,
-				"example": {
-					"id": 82,
-					"username": "oskkos"
-				}
-			},
 			"AddUserBody": {
 				"description": "Payload for adding a new user",
 				"properties": {
@@ -143,6 +121,28 @@
 					"username": "oskkos",
 					"password": "s3cret",
 					"name": "Oskari Kosonen"
+				}
+			},
+			"User": {
+				"description": "Describes a user in a dominus",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"username": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"username"
+				],
+				"type": "object",
+				"additionalProperties": false,
+				"example": {
+					"id": 82,
+					"username": "oskkos"
 				}
 			},
 			"ChangePasswordBody": {
@@ -250,6 +250,52 @@
 				"parameters": []
 			}
 		},
+		"/apartments/{apartmentId}/addCoOwner/{coOwnerId}": {
+			"put": {
+				"operationId": "AddCoOwner",
+				"responses": {
+					"204": {
+						"content": {
+							"application/json": {}
+						},
+						"description": "No content"
+					}
+				},
+				"description": "Add new apartment",
+				"tags": [
+					"Apartments"
+				],
+				"security": [
+					{
+						"apiKey": []
+					}
+				],
+				"parameters": [
+					{
+						"description": "Apartment that should get new co-owner",
+						"example": 1,
+						"in": "path",
+						"name": "apartmentId",
+						"required": true,
+						"schema": {
+							"format": "int32",
+							"type": "integer"
+						}
+					},
+					{
+						"description": "New co-owner",
+						"example": 2,
+						"in": "path",
+						"name": "coOwnerId",
+						"required": true,
+						"schema": {
+							"format": "int32",
+							"type": "integer"
+						}
+					}
+				]
+			}
+		},
 		"/auth/signin": {
 			"post": {
 				"operationId": "Signin",
@@ -284,6 +330,36 @@
 				}
 			}
 		},
+		"/auth/addUser": {
+			"post": {
+				"operationId": "AddUser",
+				"responses": {
+					"204": {
+						"content": {
+							"application/json": {}
+						},
+						"description": "No content"
+					}
+				},
+				"description": "Add new user",
+				"tags": [
+					"Auth"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"description": "AddUserBody: contains fields required for adding new user",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/AddUserBody"
+							}
+						}
+					}
+				}
+			}
+		},
 		"/users/self": {
 			"get": {
 				"operationId": "GetSelf",
@@ -309,36 +385,6 @@
 					}
 				],
 				"parameters": []
-			}
-		},
-		"/users": {
-			"post": {
-				"operationId": "AddUser",
-				"responses": {
-					"204": {
-						"content": {
-							"application/json": {}
-						},
-						"description": "No content"
-					}
-				},
-				"description": "Add new user",
-				"tags": [
-					"Users"
-				],
-				"security": [],
-				"parameters": [],
-				"requestBody": {
-					"description": "AddUserBody: contains fields required for adding new user",
-					"required": true,
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/AddUserBody"
-							}
-						}
-					}
-				}
 			}
 		},
 		"/users/changePassword": {

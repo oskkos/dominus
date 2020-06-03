@@ -9,6 +9,8 @@ import express, { Response, Request, NextFunction } from 'express';
 import log4js from 'log4js';
 import { join } from 'path';
 import { RegisterRoutes } from '../routes';
+import { ForbiddenError } from './errors/ForbiddenError';
+import { ConflictError } from './errors/ConflictError';
 import { NotFoundError } from './errors/NotFoundError';
 import { TypeORMLogger } from './middlewares/TypeORMLogger';
 import { getLogger } from './middlewares/logger';
@@ -95,11 +97,17 @@ getConnectionOptions().then((connectionOptions) => {
           return res.status(code).json({ message, details: error.toString() });
         };
 
-        if (err instanceof ValidateError) {
-          return handleError(422, 'Validation failed', err);
+        if (err instanceof ForbiddenError) {
+          return handleError(403, 'Forbidden', err);
         }
         if (err instanceof NotFoundError) {
-          return handleError(404, 'Not found', err);
+          return handleError(404, 'Not Found', err);
+        }
+        if (err instanceof ConflictError) {
+          return handleError(409, 'Conflict', err);
+        }
+        if (err instanceof ValidateError) {
+          return handleError(422, 'Validation failed', err);
         }
         if (err instanceof Error) {
           return handleError(500, 'Internal Server Error', err);

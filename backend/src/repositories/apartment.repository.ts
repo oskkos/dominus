@@ -1,14 +1,16 @@
-import { getConnection } from 'typeorm';
+import { getConnection, getRepository } from 'typeorm';
 import { Apartment } from '../models/Apartment';
 import { Apartment as EntityApartment } from '../entities/Apartment';
 import { User as EntityUser } from '../entities/User';
 import { EventLog } from '../entities/EventLog';
+import { ForbiddenError } from '../errors/ForbiddenError';
+import { ConflictError } from '../errors/ConflictError';
 
 export async function addApartment(
   apartment: Apartment,
   ownerId: number,
 ): Promise<Apartment> {
-  const userRepository = getConnection().getRepository(EntityUser);
+  const userRepository = getRepository(EntityUser);
   const owner = await userRepository.findOneOrFail({ id: ownerId });
 
   return getConnection().transaction(async (transactionalEntityManager) => {
@@ -48,4 +50,34 @@ export async function getApartments(ownerId: number): Promise<Apartment[]> {
 
   // TODO: Convert to Model objects
   return apartments;
+}
+export async function addCoOwner(
+  apartmentId: number,
+  ownerId: number,
+  coOwnerId: number,
+): Promise<void> {
+  const apartmentRepository = getRepository(EntityApartment);
+  const apartment = await apartmentRepository.findOneOrFail({
+    id: apartmentId,
+  });
+  if (apartment.ownerId !== ownerId) {
+    throw new ForbiddenError('Invalid owner for apartment!', { ownerId });
+  }
+  if (apartment.coOwners.map((u) => u.id).includes(coOwnerId)) {
+    throw new ConflictError(`Co-owner already linked to apartment!`, {
+      coOwnerId,
+      apartmentId,
+    });
+  }
+  const userRepository = getRepository(EntityUser);
+  const coOwner = await userRepository.findOneOrFail(coOwnerId);
+  const existingCoOwners = apartment.coOwners;
+  apartment.coOwners = [...(existingCoOwners ?? []), coOwner];
+
+  return getConnection().transaction(async (transactionalEntityManager) => {
+    await transactionalEntityManager.save(apartment);
+    await transactionalEntityManager.save(
+      EventLog.CoOwnerAdded(ownerId, { apartmentId, coOwnerId }),
+    );
+  });
 }
