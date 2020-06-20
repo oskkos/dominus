@@ -10,15 +10,25 @@ export class EventLog extends EntityWithIdAndTimestamps {
   entityId!: number;
 
   @Column()
+  userId!: number;
+
+  @Column()
   event!: string;
 
   @Column({ type: 'json' })
   eventData!: {};
 
-  constructor(entity: string, entityId: number, event: string, eventData: {}) {
+  constructor(
+    entity: string,
+    entityId: number,
+    userId: number,
+    event: string,
+    eventData: {},
+  ) {
     super();
     this.entity = entity;
     this.entityId = entityId;
+    this.userId = userId;
     this.event = event;
     this.eventData = eventData;
   }
@@ -27,27 +37,40 @@ export class EventLog extends EntityWithIdAndTimestamps {
     userId: number,
     data: { username: string; password: string; name: string },
   ): EventLog {
-    return new EventLog('User', userId, 'UserAdded', data);
+    return new EventLog('User', userId, userId, 'UserAdded', data);
   }
 
   static UserPasswordChanged(
     userId: number,
     data: { password: string },
   ): EventLog {
-    return new EventLog('User', userId, 'UserPasswordChanged', data);
+    return new EventLog('User', userId, userId, 'UserPasswordChanged', data);
   }
 
   static ApartmentAdded(
     userId: number,
-    data: { apartment: {}; ownerId: number },
+    apartmentId: number,
+    data: { apartment: {} },
   ): EventLog {
-    return new EventLog('Apartment', userId, 'ApartmentAdded', data);
+    return new EventLog(
+      'Apartment',
+      apartmentId,
+      userId,
+      'ApartmentAdded',
+      data,
+    );
   }
 
   static CoOwnerAdded(
     userId: number,
     data: { apartmentId: number; coOwnerId: number },
   ): EventLog {
-    return new EventLog('Apartment', userId, 'CoOwnerAdded', data);
+    return new EventLog(
+      'Apartment',
+      data.apartmentId,
+      userId,
+      'CoOwnerAdded',
+      data,
+    );
   }
 }

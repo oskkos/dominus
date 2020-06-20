@@ -26,7 +26,7 @@ export async function addApartment(
     );
     const apt = await transactionalEntityManager.save(entityAptmt);
     await transactionalEntityManager.save(
-      EventLog.ApartmentAdded(apt.id, { apartment, ownerId }),
+      EventLog.ApartmentAdded(ownerId, apt.id, { apartment }),
     );
 
     // TODO: Convert to Model object
