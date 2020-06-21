@@ -19,7 +19,7 @@ export async function changePassword(
   oldPwd: string,
   newPwd: string,
 ): Promise<void> {
-  // FIXME!
+  // FIXME: Two calls to repo, is it really necessary?
   const u = await UserRepo.openById(userId);
   const user = await UserRepo.getByUserName(u.username);
 

@@ -14,6 +14,7 @@ export interface User {
    */
   id: number;
   username: string;
+  name: string;
 }
 export interface UserWithCryptedPassword extends User {
   cryptedPassword: string;

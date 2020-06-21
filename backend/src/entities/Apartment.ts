@@ -58,10 +58,7 @@ export class Apartment extends EntityWithIdAndTimestamps {
   @ManyToOne(() => User)
   owner: User;
 
-  @ManyToMany(() => User, {
-    cascade: true,
-    eager: true,
-  })
+  @ManyToMany(() => User, { cascade: true })
   @JoinTable()
   coOwners: User[];
 }

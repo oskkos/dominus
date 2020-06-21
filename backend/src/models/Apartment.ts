@@ -1,5 +1,7 @@
+import { User } from './User';
+
 /**
- * Apartment details
+ * Add apartment
  *
  * @tsoaModel
  * @example {
@@ -11,7 +13,7 @@
  *   "postDistrict": "Tampere"
  * }
  */
-export interface Apartment {
+export interface AddApartment {
   /**
    * @isInt Integer
    */
@@ -24,4 +26,32 @@ export interface Apartment {
   streetAddress: string;
   postalCode: string;
   postDistrict: string;
+}
+
+/**
+ * Apartment details
+ *
+ * @tsoaModel
+ * @example {
+ *   "apartmentDescription": "2h+k+ph+parv.",
+ *   "coOwners": [{
+ *     "id": 75,
+ *     "username": "arokman",
+ *     "name: "Annika Rökman"
+ *   }],
+ *   "owner": {
+ *     "id": 82,
+ *     "username": "oskkos",
+ *     "name": "Oskari Kosonen"
+ *   },
+ *   "roomCount": 2,
+ *   "surfaceArea": 54.5,
+ *   "streetAddress": "Mallikatu 27 A 8",
+ *   "postalCode": "33100",
+ *   "postDistrict": "Tampere"
+ * }
+ */
+export interface Apartment extends AddApartment {
+  coOwners: User[];
+  owner: User;
 }

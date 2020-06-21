@@ -3,12 +3,13 @@ import { UserWithCryptedPassword, User } from '../models/User';
 import { User as EntityUser } from '../entities/User';
 import { EventLog } from '../entities/EventLog';
 import { NotFoundError } from '../errors/NotFoundError';
+import { userMorph } from './morphism';
 
 export async function openById(id: number): Promise<User> {
   const userRepository = getConnection().getRepository(EntityUser);
   const user = await userRepository.findOne({ id });
   if (user) {
-    return { id: user.id, username: user.username };
+    return userMorph(user);
   }
   throw new NotFoundError('User', { id });
 }
@@ -20,18 +21,14 @@ export async function getByUserName(
   if (!user) {
     throw new NotFoundError('User', { username });
   }
-  return {
-    id: user.id,
-    username: user.username,
-    cryptedPassword: user.cryptedPassword,
-  };
+  return { ...userMorph(user), cryptedPassword: user.cryptedPassword };
 }
 
 export async function addUser(
   username: string,
   password: string,
   name: string,
-): Promise<EntityUser> {
+): Promise<User> {
   return getConnection().transaction(async (transactionalEntityManager) => {
     const user = await transactionalEntityManager.save(
       new EntityUser(username, password, name),
@@ -39,7 +36,7 @@ export async function addUser(
     await transactionalEntityManager.save(
       EventLog.UserAdded(user.id, { username, password: '*****', name }),
     );
-    return user;
+    return userMorph(user);
   });
 }
 

@@ -1,13 +1,14 @@
 import { getConnection, getRepository } from 'typeorm';
-import { Apartment } from '../models/Apartment';
+import { AddApartment, Apartment } from '../models/Apartment';
 import { Apartment as EntityApartment } from '../entities/Apartment';
 import { User as EntityUser } from '../entities/User';
 import { EventLog } from '../entities/EventLog';
 import { ForbiddenError } from '../errors/ForbiddenError';
 import { ConflictError } from '../errors/ConflictError';
+import { apartmentMorph } from './morphism';
 
 export async function addApartment(
-  apartment: Apartment,
+  apartment: AddApartment,
   ownerId: number,
 ): Promise<Apartment> {
   const userRepository = getRepository(EntityUser);
@@ -29,27 +30,20 @@ export async function addApartment(
       EventLog.ApartmentAdded(ownerId, apt.id, { apartment }),
     );
 
-    // TODO: Convert to Model object
-    return apt;
+    return apartmentMorph(apt);
   });
 }
 
 export async function getApartments(ownerId: number): Promise<Apartment[]> {
-  const apartments = await getConnection()
-    .createQueryBuilder()
-    .select('apartment')
-    .from(EntityApartment, 'apartment')
-    .leftJoinAndSelect(
-      'apartment_co_owners_user',
-      'coOwner',
-      'coOwner.apartmentId = apartment.id',
-    )
-    .where('"ownerId" = :ownerId', { ownerId })
-    .orWhere('"userId" = :coOwnerid', { coOwnerid: ownerId })
-    .getMany();
+  const query = getRepository(EntityApartment)
+    .createQueryBuilder('apartment')
+    .leftJoinAndSelect('apartment.owner', 'owner')
+    .leftJoinAndSelect('apartment.coOwners', 'coOwners')
+    .where('owner.id = :ownerId', { ownerId })
+    .orWhere('coOwners.id = :coOwnerid', { coOwnerid: ownerId });
+  const apartments = await query.getMany();
 
-  // TODO: Convert to Model objects
-  return apartments;
+  return apartmentMorph(apartments);
 }
 export async function addCoOwner(
   apartmentId: number,

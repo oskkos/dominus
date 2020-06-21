@@ -1,8 +1,8 @@
-import { Apartment } from '../models/Apartment';
+import { AddApartment, Apartment } from '../models/Apartment';
 import * as ApartmentRepo from '../repositories/apartment.repository';
 
 export async function addApartment(
-  apartment: Apartment,
+  apartment: AddApartment,
   ownerId: number,
 ): Promise<Apartment> {
   return ApartmentRepo.addApartment(apartment, ownerId);

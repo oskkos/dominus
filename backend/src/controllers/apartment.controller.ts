@@ -11,7 +11,7 @@ import {
   Tags,
 } from 'tsoa';
 import { Request as ExRequest } from 'express';
-import { Apartment } from '../models/Apartment';
+import { AddApartment, Apartment } from '../models/Apartment';
 import * as ApartmentService from '../services/apartment.service';
 import { getUserId } from '../middlewares/auth.jwt';
 @Route('apartments')
@@ -26,7 +26,7 @@ export class ApartmentController extends Controller {
   @Post()
   public addApartment(
     @Request() request: ExRequest,
-    @Body() data: Apartment,
+    @Body() data: AddApartment,
   ): Promise<Apartment> {
     return ApartmentService.addApartment(data, getUserId(request));
   }

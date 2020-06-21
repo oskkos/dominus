@@ -14,7 +14,32 @@ import * as express from 'express';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
 const models: TsoaRoute.Models = {
+    "User": {
+        "dataType": "refObject",
+        "properties": {
+            "id": { "dataType": "integer", "required": true, "validators": { "isInt": { "errorMsg": "Integer" } } },
+            "username": { "dataType": "string", "required": true },
+            "name": { "dataType": "string", "required": true },
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "Apartment": {
+        "dataType": "refObject",
+        "properties": {
+            "apartmentDescription": { "dataType": "string", "required": true, "validators": { "isInt": { "errorMsg": "Integer" } } },
+            "roomCount": { "dataType": "integer", "required": true, "validators": { "isInt": { "errorMsg": "Integer" } } },
+            "surfaceArea": { "dataType": "double", "required": true },
+            "streetAddress": { "dataType": "string", "required": true },
+            "postalCode": { "dataType": "string", "required": true },
+            "postDistrict": { "dataType": "string", "required": true },
+            "coOwners": { "dataType": "array", "array": { "ref": "User" }, "required": true },
+            "owner": { "ref": "User", "required": true },
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AddApartment": {
         "dataType": "refObject",
         "properties": {
             "apartmentDescription": { "dataType": "string", "required": true, "validators": { "isInt": { "errorMsg": "Integer" } } },
@@ -56,15 +81,6 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "User": {
-        "dataType": "refObject",
-        "properties": {
-            "id": { "dataType": "integer", "required": true, "validators": { "isInt": { "errorMsg": "Integer" } } },
-            "username": { "dataType": "string", "required": true },
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "ChangePasswordBody": {
         "dataType": "refObject",
         "properties": {
@@ -89,7 +105,7 @@ export function RegisterRoutes(app: express.Express) {
         function(request: any, response: any, next: any) {
             const args = {
                 request: { "in": "request", "name": "request", "required": true, "dataType": "object" },
-                data: { "in": "body", "name": "data", "required": true, "ref": "Apartment" },
+                data: { "in": "body", "name": "data", "required": true, "ref": "AddApartment" },
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
