@@ -6,15 +6,13 @@ import {
   Redirect,
 } from 'react-router-dom';
 import { RouteComponentProps, RouteProps } from 'react-router';
+import jwtDecode from 'jwt-decode';
 import DominusAppBar from './AppBar';
 import OwnApartments from './OwnApartments';
 import Login from './Login';
-import jwtDecode from 'jwt-decode';
 
-// eslint-disable-next-line functional/functional-parameters
 function isAuthenticated(): boolean {
   const token = localStorage.getItem('dominus-token');
-  // eslint-disable-next-line functional/no-conditional-statement
   if (!token) {
     return false;
   }
@@ -24,25 +22,19 @@ function isAuthenticated(): boolean {
 export default function Dominus(_props: {}): JSX.Element {
   const [state, setState] = useState({ isAuthenticated: isAuthenticated() });
 
-  // eslint-disable-next-line functional/no-return-void,functional/functional-parameters
   function onLogout(): void {
-    // eslint-disable-next-line functional/no-expression-statement
     localStorage.removeItem('dominus-token');
-    // eslint-disable-next-line functional/no-expression-statement
     setState({ ...state, isAuthenticated: false });
   }
-  // eslint-disable-next-line functional/no-return-void
   function onLogin(token: string|null): void {
-    // eslint-disable-next-line functional/no-expression-statement
     localStorage.setItem('dominus-token', String(token));
-    // eslint-disable-next-line functional/no-expression-statement
     setState({ ...state, isAuthenticated: true });
   }
   function AuthRoute(props: RouteProps): JSX.Element {
     const { children, ...rest } = props;
 
-    const renderer = (props: RouteComponentProps<{}>): ReactNode => {
-      const { location } = props;
+    const renderer = (routeComponentProps: RouteComponentProps<{}>): ReactNode => {
+      const { location } = routeComponentProps;
       return state.isAuthenticated
         ? children
         : (
@@ -54,6 +46,7 @@ export default function Dominus(_props: {}): JSX.Element {
           />
         );
     };
+    // eslint-disable-next-line react/jsx-props-no-spreading
     return <Route {...rest} render={renderer} />;
   }
 

@@ -33,6 +33,7 @@ export interface AddApartment {
  *
  * @tsoaModel
  * @example {
+ *   "id": 82,
  *   "apartmentDescription": "2h+k+ph+parv.",
  *   "coOwners": [{
  *     "id": 75,
@@ -52,6 +53,10 @@ export interface AddApartment {
  * }
  */
 export interface Apartment extends AddApartment {
+  /**
+   * @isInt Integer
+   */
+  id: number;
   coOwners: User[];
   owner: User;
 }

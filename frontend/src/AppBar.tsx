@@ -6,13 +6,15 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import {
-  List, ListItem, ListItemIcon, ListItemText, Drawer as SwipeableDrawer,
+  Button, Drawer as SwipeableDrawer, List, ListItem, ListItemIcon, ListItemText,
 } from '@material-ui/core';
 import {
   Home, HomeWork, HowToReg, Person, Settings,
 } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import { i18nKeys, useLocHelper } from './i18n';
+
+interface Props {readonly authenticated?: boolean; readonly logout: () => void}
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -29,13 +31,11 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 // TODO: Type-safe paths
 type Item = {readonly locCode: i18nKeys; readonly icon: JSX.Element; readonly path: string};
 
-// eslint-disable-next-line functional/no-return-void
-export default function DominusAppBar(props: {readonly authenticated?: boolean; readonly logout: () => void}): JSX.Element {
-  const [state, setState] = useState({ open: false, authenticated: props.authenticated });
-  // eslint-disable-next-line functional/no-conditional-statement
-  if (props.authenticated !== state.authenticated) {
-    // eslint-disable-next-line functional/no-expression-statement
-    setState({ ...state, authenticated: props.authenticated });
+export default function DominusAppBar(props: Props): JSX.Element {
+  const { authenticated, logout } = props;
+  const [state, setState] = useState({ open: false, authenticated });
+  if (authenticated !== state.authenticated) {
+    setState({ ...state, authenticated });
   }
   const classes = useStyles();
   const { t } = useLocHelper();
@@ -52,17 +52,28 @@ export default function DominusAppBar(props: {readonly authenticated?: boolean; 
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton disabled={!state.authenticated} onClick={(_e) => setState({ ...state, open: !state.open })} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+          <IconButton
+            disabled={!state.authenticated}
+            onClick={(_e): void => setState({ ...state, open: !state.open })}
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+          >
             <MenuIcon />
           </IconButton>
           <SwipeableDrawer
             anchor="left"
             open={state.open}
-            onClose={(_e) => setState({ ...state, open: false })}
+            onClose={(_e): void => setState({ ...state, open: false })}
           >
             <List>
               {items.map((item) => (
-                <Link to={item.path} onClick={(_e) => setState({ ...state, open: false })}>
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  onClick={(_e): void => setState({ ...state, open: false })}
+                >
                   <ListItem button key={item.locCode}>
                     <ListItemIcon>{item.icon}</ListItemIcon>
                     <ListItemText>
@@ -76,7 +87,7 @@ export default function DominusAppBar(props: {readonly authenticated?: boolean; 
           <Typography variant="h6" className={classes.title}>
             Dominus
           </Typography>
-          {state.authenticated && <a onClick={(e: MouseEvent) => props.logout()}>Logout</a>}
+          {state.authenticated && <Button variant="contained" color="secondary" onClick={(_e: MouseEvent): void => logout()}>Logout</Button>}
         </Toolbar>
       </AppBar>
     </div>

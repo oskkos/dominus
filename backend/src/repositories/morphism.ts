@@ -15,6 +15,7 @@ const entityApartmentToModelApartmentSchema: StrictSchema<
   ModelApartment,
   EntityApartment
 > = {
+  id: 'id',
   apartmentDescription: 'apartmentDescription',
   postDistrict: 'postDistrict',
   postalCode: 'postalCode',

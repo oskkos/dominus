@@ -29,7 +29,8 @@
 				"additionalProperties": false,
 				"example": {
 					"id": 82,
-					"username": "oskkos"
+					"username": "oskkos",
+					"name": "Oskari Kosonen"
 				}
 			},
 			"Apartment": {
@@ -55,6 +56,10 @@
 					"postDistrict": {
 						"type": "string"
 					},
+					"id": {
+						"type": "integer",
+						"format": "int32"
+					},
 					"coOwners": {
 						"items": {
 							"$ref": "#/components/schemas/User"
@@ -72,6 +77,7 @@
 					"streetAddress",
 					"postalCode",
 					"postDistrict",
+					"id",
 					"coOwners",
 					"owner"
 				],

@@ -45,9 +45,7 @@
       "airbnb/whitespace",
       "plugin:@typescript-eslint/eslint-recommended",
       "plugin:@typescript-eslint/recommended",
-      "plugin:@typescript-eslint/recommended-requiring-type-checking",
-      "plugin:functional/external-recommended",
-      "plugin:functional/recommended"
+      "plugin:@typescript-eslint/recommended-requiring-type-checking"
     ],
     "rules": {
       "no-var": "error",

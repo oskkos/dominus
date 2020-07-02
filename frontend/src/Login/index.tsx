@@ -4,10 +4,13 @@ import {
 } from '@material-ui/core';
 import LockIcon from '@material-ui/icons/Lock';
 import { makeStyles } from '@material-ui/core/styles';
-import { useLocHelper } from '../i18n';
 import { useHistory, useLocation } from 'react-router-dom';
 import { Alert } from '@material-ui/lab';
+import { useLocHelper } from '../i18n';
 import { AuthApi } from '../api/apis';
+
+interface AuthData {readonly msg?: string; readonly username?: string; readonly password?: string}
+interface Props { readonly onLogin: (token: string|null) => void }
 
 const useStyles = makeStyles({
   wrapper: {
@@ -41,22 +44,18 @@ const useStyles = makeStyles({
   },
   error: {
     marginTop: '10px',
-  }
+  },
 });
-// eslint-disable-next-line functional/no-return-void
-export default function Login(props: { readonly onLogin: (token: string|null) => void }): JSX.Element {
+export default function Login(props: Props): JSX.Element {
   const classes = useStyles();
   const { t } = useLocHelper();
-  const [state, setState] = useState({} as {readonly msg?: string; readonly username?: string; readonly password?: string});
+  const [state, setState] = useState({} as AuthData);
   const history = useHistory();
   const location = useLocation<{ readonly from: string }>();
   const authApi = new AuthApi();
-  const { from } = location.state || { from: { pathname: "/" } };
+  const { from } = location.state || { from: { pathname: '/' } };
 
   async function handleSubmit(event: FormEvent): Promise<boolean> {
-    // eslint-disable-next-line functional/no-expression-statement
-    // console.log(state);
-    // eslint-disable-next-line functional/no-expression-statement
     event.preventDefault();
     /*
     const response: Response = await fetch('http://localhost:7000/api/auth/signin', {
@@ -74,22 +73,15 @@ export default function Login(props: { readonly onLogin: (token: string|null) =>
     });
     */
     const token = await authApi.signin({ authUser: { password: state.password ?? '', username: state.username ?? '' } });
-    // eslint-disable-next-line functional/no-expression-statement
     history.replace(from);
-    // eslint-disable-next-line functional/no-expression-statement
     props.onLogin(token.accessToken);
 
     /*
-    // eslint-disable-next-line functional/no-expression-statement
     response.json().then((ret: {readonly message: string; readonly accessToken: string}) => {
-      // eslint-disable-next-line functional/no-conditional-statement
       if (response.status !== 200) {
-        // eslint-disable-next-line functional/no-expression-statement
         setState({ ...state, msg: ret.message });
       } else {
-        // eslint-disable-next-line functional/no-expression-statement
         history.replace(from);
-        // eslint-disable-next-line functional/no-expression-statement
         props.onLogin(ret.accessToken);
       }
     });
@@ -119,7 +111,7 @@ export default function Login(props: { readonly onLogin: (token: string|null) =>
             type="text"
             autoComplete="current-username"
             variant="outlined"
-            onChange={(e) => setState({ ...state, username: e.target.value })}
+            onChange={(e): void => setState({ ...state, username: e.target.value })}
           />
           <TextField
             required
@@ -128,7 +120,7 @@ export default function Login(props: { readonly onLogin: (token: string|null) =>
             type="password"
             autoComplete="current-password"
             variant="outlined"
-            onChange={(e) => setState({ ...state, password: e.target.value })}
+            onChange={(e): void => setState({ ...state, password: e.target.value })}
           />
         </CardContent>
         <CardActions className={classes.footer}>

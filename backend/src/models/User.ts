@@ -5,7 +5,8 @@
  * @tsoaModel
  * @example {
  *   "id": 82,
- *   "username": "oskkos"
+ *   "username": "oskkos",
+ *   "name": "Oskari Kosonen"
  * }
  */
 export interface User {

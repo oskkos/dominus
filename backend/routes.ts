@@ -33,6 +33,7 @@ const models: TsoaRoute.Models = {
             "streetAddress": { "dataType": "string", "required": true },
             "postalCode": { "dataType": "string", "required": true },
             "postDistrict": { "dataType": "string", "required": true },
+            "id": { "dataType": "integer", "required": true, "validators": { "isInt": { "errorMsg": "Integer" } } },
             "coOwners": { "dataType": "array", "array": { "ref": "User" }, "required": true },
             "owner": { "ref": "User", "required": true },
         },
