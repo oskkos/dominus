@@ -73,8 +73,8 @@ export default function Login(props: Props): JSX.Element {
     });
     */
     const token = await authApi.signin({ authUser: { password: state.password ?? '', username: state.username ?? '' } });
-    history.replace(from);
     props.onLogin(token.accessToken);
+    history.replace(from);
 
     /*
     response.json().then((ret: {readonly message: string; readonly accessToken: string}) => {
