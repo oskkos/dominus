@@ -7,4 +7,6 @@ export default {
   otherInterestingApartments: 'Other interesting apartments',
   password: 'Password',
   username: 'Username',
+  logout: 'Logout',
+  errored: 'Oops, something went wrong...',
 };

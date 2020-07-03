@@ -87,7 +87,7 @@ export default function DominusAppBar(props: Props): JSX.Element {
           <Typography variant="h6" className={classes.title}>
             Dominus
           </Typography>
-          {state.authenticated && <Button variant="contained" color="secondary" onClick={(_e: MouseEvent): void => logout()}>Logout</Button>}
+          {state.authenticated && <Button variant="contained" color="secondary" onClick={(_e: MouseEvent): void => logout()}>{t('logout')}</Button>}
         </Toolbar>
       </AppBar>
     </div>

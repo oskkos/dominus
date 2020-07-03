@@ -7,4 +7,6 @@ export default {
   otherInterestingApartments: 'Muut kiinnostavat kohteet',
   password: 'Salasana',
   username: 'Käyttäjätunnus',
+  logout: 'Uloskirjaus',
+  errored: 'Hupsista, nyt taisi mennä jotain pieleen...',
 };
