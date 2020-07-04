@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Button,
   Dialog,
@@ -9,6 +9,7 @@ import {
   TextField,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { AddApartment } from '../api/models';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,10 +18,16 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+
 interface Props {open: boolean; handleClose: () => void}
 export default function NewApartmentDialog(props: Props): JSX.Element {
   const { open, handleClose } = props;
   const classes = useStyles();
+  const [state, setState] = useState({} as AddApartment);
+
+  const handleSubmit = (): void => {
+    console.log(state);
+  };
 
   return (
     <Dialog open={open} onClose={handleClose} className={classes.root} aria-labelledby="form-dialog-title">
@@ -32,6 +39,7 @@ export default function NewApartmentDialog(props: Props): JSX.Element {
         </DialogContentText>
         <TextField
           id="apartmentDescription"
+          onChange={(e): void => setState({ ...state, apartmentDescription: e.target.value })}
           label="description"
           type="text"
           variant="outlined"
@@ -39,6 +47,7 @@ export default function NewApartmentDialog(props: Props): JSX.Element {
         />
         <TextField
           id="roomCount"
+          onChange={(e): void => setState({ ...state, roomCount: Number(e.target.value) })}
           label="rooms"
           type="number"
           variant="outlined"
@@ -46,6 +55,7 @@ export default function NewApartmentDialog(props: Props): JSX.Element {
         />
         <TextField
           id="surfaceArea"
+          onChange={(e): void => setState({ ...state, surfaceArea: Number(e.target.value) })}
           label="surface"
           type="number"
           variant="outlined"
@@ -53,6 +63,7 @@ export default function NewApartmentDialog(props: Props): JSX.Element {
         />
         <TextField
           id="streetAddress"
+          onChange={(e): void => setState({ ...state, streetAddress: e.target.value })}
           label="street address"
           type="text"
           variant="outlined"
@@ -60,6 +71,7 @@ export default function NewApartmentDialog(props: Props): JSX.Element {
         />
         <TextField
           id="postalCode"
+          onChange={(e): void => setState({ ...state, postalCode: e.target.value })}
           label="postal code"
           type="text"
           variant="outlined"
@@ -67,6 +79,7 @@ export default function NewApartmentDialog(props: Props): JSX.Element {
         />
         <TextField
           id="postDistrict"
+          onChange={(e): void => setState({ ...state, postDistrict: e.target.value })}
           label="city"
           type="text"
           variant="outlined"
@@ -74,11 +87,11 @@ export default function NewApartmentDialog(props: Props): JSX.Element {
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary">
-          Cancel
+        <Button onClick={handleSubmit} variant="contained" color="primary">
+          Submit
         </Button>
-        <Button onClick={handleClose} color="primary">
-          Subscribe
+        <Button onClick={handleClose} variant="outlined" color="primary">
+          Cancel
         </Button>
       </DialogActions>
     </Dialog>

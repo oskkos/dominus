@@ -57,35 +57,11 @@ export default function Login(props: Props): JSX.Element {
 
   async function handleSubmit(event: FormEvent): Promise<boolean> {
     event.preventDefault();
-    /*
-    const response: Response = await fetch('http://localhost:7000/api/auth/signin', {
-      method: 'POST',
-      mode: 'cors', // no-cors, *cors, same-origin
-      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: 'same-origin', // include, *same-origin, omit
-      headers: {
-        'Content-Type': 'application/json',
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      redirect: 'follow', // manual, *follow, error
-      referrerPolicy: 'no-referrer', // no-referrer, *client
-      body: JSON.stringify(state), // body data type must match "Content-Type" header
-    });
-    */
+
     const token = await authApi.signin({ authUser: { password: state.password ?? '', username: state.username ?? '' } });
     props.onLogin(token.accessToken);
     history.replace(from);
 
-    /*
-    response.json().then((ret: {readonly message: string; readonly accessToken: string}) => {
-      if (response.status !== 200) {
-        setState({ ...state, msg: ret.message });
-      } else {
-        history.replace(from);
-        props.onLogin(ret.accessToken);
-      }
-    });
-     */
     return false;
   }
   return (
