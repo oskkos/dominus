@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
 }));
+export const apartmentsApi = new ApartmentsApi(new Configuration({
+  apiKey: (_key): string => localStorage.getItem('dominus-token') || '',
+}));
 
 export default function OwnApartments(_props: {}): JSX.Element {
   const [error, setError] = useState(null);
@@ -37,10 +40,6 @@ export default function OwnApartments(_props: {}): JSX.Element {
   };
 
   useEffect(() => {
-    const apartmentsApi = new ApartmentsApi(new Configuration({
-      // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-      apiKey: (_key) => localStorage.getItem('dominus-token') || '',
-    }));
     apartmentsApi.getApartments()
       .then(
         (data) => {

@@ -14,12 +14,9 @@ import { User } from './User';
  * }
  */
 export interface AddApartment {
-  /**
-   * @isInt Integer
-   */
   apartmentDescription: string;
   /**
-   * @isInt Integer
+   * @isInt Room count value must be integer
    */
   roomCount: number;
   surfaceArea: number;
@@ -54,7 +51,7 @@ export interface AddApartment {
  */
 export interface Apartment extends AddApartment {
   /**
-   * @isInt Integer
+   * @isInt id value must be integer
    */
   id: number;
   coOwners: User[];

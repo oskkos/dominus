@@ -6,6 +6,7 @@ import {
   Post,
   Put,
   Request,
+  Response,
   Route,
   Security,
   Tags,
@@ -14,6 +15,12 @@ import { Request as ExRequest } from 'express';
 import { AddApartment, Apartment } from '../models/Apartment';
 import * as ApartmentService from '../services/apartment.service';
 import { getUserId } from '../middlewares/auth.jwt';
+
+interface ValidateErrorJSON {
+  message: 'Validation failed';
+  details: { [name: string]: unknown };
+}
+
 @Route('apartments')
 @Tags('Apartments')
 @Security('apiKey')
@@ -23,6 +30,7 @@ export class ApartmentController extends Controller {
    * @param request Used to get user id
    * @param data Apartment: contains fields required for adding new apartment
    */
+  @Response<ValidateErrorJSON>(422, 'Validation Failed')
   @Post()
   public addApartment(
     @Request() request: ExRequest,

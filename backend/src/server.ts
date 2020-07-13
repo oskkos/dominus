@@ -92,9 +92,12 @@ getConnectionOptions().then((connectionOptions) => {
           code: number,
           message: string,
           error: Error,
+          details?: () => string,
         ): Response => {
           logger.error(`${code} ${message}`, error);
-          return res.status(code).json({ message, details: error.toString() });
+          return res
+            .status(code)
+            .json({ message, details: details ? details() : error.toString() });
         };
 
         if (err instanceof ForbiddenError) {
@@ -107,7 +110,9 @@ getConnectionOptions().then((connectionOptions) => {
           return handleError(409, 'Conflict', err);
         }
         if (err instanceof ValidateError) {
-          return handleError(422, 'Validation failed', err);
+          return handleError(422, 'Validation failed', err, () =>
+            JSON.stringify(err.fields),
+          );
         }
         if (err instanceof Error) {
           return handleError(500, 'Internal Server Error', err);
